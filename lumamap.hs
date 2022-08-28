@@ -1,10 +1,23 @@
-import Data.Map (Map)
-import Data.Map as M
+{-# LANGUAGE ScopedTypeVariables #-}
+
+import           Data.Map (Map)
+import qualified Data.Map   as M
+import           Data.Maybe as Mb
 
 
-type Board = Int -- ^ The Lumatone has five, numbered 0 through 4.
+-- ** Tests with no library dependencies
 
-type Key = Int -- ^ Each Board has 56, numbered 0 to 55.
+runTests = mapM_ (putStrLn . show) $
+  map (\(a,b) -> (a, all id b))
+  [ ("test_board_key_to_xy", test_board_key_to_xy)
+  , ("test_xy_to_edoNote", test_xy_to_edoNote) ]
+
+
+-- ** Many synonyms for `Int`
+
+type Board = Int -- ^ The Lumatone has five boards, numbered 0 through 4.
+
+type Key = Int -- ^ Each Board has 56 keys, numbered 0 to 55.
 -- Refer to this picture on p. 28 of the Lumatone manual for which is where:
 -- [[~/many-small/music-making/lumatone/2022-08-27-stl4uf7J.one-lumatone-octave.png]]
 
@@ -13,8 +26,13 @@ type Key = Int -- ^ Each Board has 56, numbered 0 to 55.
 type X = Int
 type Y = Int
 
-key_positions :: Map Int (Int, Int)
-key_positions = M.fromList [
+type EdoNote     = Int    -- ^ Unbounded int.
+type MidiNote    = Int    -- ^ A value in [0,127]. (0 means note off.)
+type MidiChannel = Int -- ^ A value in [0,15], I guess.
+                       -- TODO : Right?
+
+key_xy_map :: Map Key (X,Y)
+key_xy_map = M.fromList [
   ( 0, ( 0, 0)),
   ( 1, ( 1, 0)),
 
@@ -89,7 +107,40 @@ key_positions = M.fromList [
   (54, (-1,11)),
   (55, ( 0,11)) ]
 
-all_280_keys :: [ (Board, Key) ]
-all_280_keys = [ (b,k)
-               | b <- [0..4],
-                 k <- [0..55] ]
+board_keys :: [ (Board, Key) ]
+board_keys = [ (b,k)
+             | b <- [0..4],
+               k <- [0..55] ]
+
+mulXY :: Int -> (X,Y) -> (X,Y)
+mulXY i (x,y) = (i*x, i*y)
+
+addXY :: (X,Y) -> (X,Y) -> (X,Y)
+addXY (a,b) (c,d) = (a+c, b+d)
+
+board_key_to_xy :: (Board,Key) -> (X,Y)
+board_key_to_xy (b,k) =
+  let base_xy :: (X,Y) = maybe (error "out of bounds") id
+                         $ M.lookup k key_xy_map
+  in addXY (mulXY b (5,2)) base_xy
+
+test_board_key_to_xy :: [Bool]
+test_board_key_to_xy =
+  [ board_key_to_xy (0,0) == (0,0)
+  , board_key_to_xy (1,0) == (5,2)
+  , board_key_to_xy (0,1) == (1,0)
+  , board_key_to_xy (0,2) == (0,1) ]
+
+xy_to_edoNote :: EdoNote -> EdoNote -> (X,Y) -> Int
+xy_to_edoNote right_step downleft_step (x,y) =
+  right_step * x + downleft_step * y
+
+test_xy_to_edoNote :: [Bool]
+test_xy_to_edoNote =
+  [ xy_to_edoNote 5 3 (5,2) == 31 ] -- 31-edo Bosanquet, first octave
+
+board_edoNotes :: Map (Board, Key) EdoNote
+board_edoNotes =
+  let f :: (Board, Key) -> EdoNote
+      f = xy_to_edoNote . board_key_to_xy
+  in M.fromList $ map f board_keys
