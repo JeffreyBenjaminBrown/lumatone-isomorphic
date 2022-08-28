@@ -1,8 +1,11 @@
 {-# LANGUAGE ScopedTypeVariables #-}
 
+module Main where
+
 import           Data.Map (Map)
 import qualified Data.Map   as M
 import           Data.Maybe as Mb
+import           Test.HUnit
 
 
 -- ** Tests with no library dependencies
@@ -30,6 +33,9 @@ type EdoNote     = Int    -- ^ Unbounded int.
 type MidiNote    = Int    -- ^ A value in [0,127]. (0 means note off.)
 type MidiChannel = Int -- ^ A value in [0,15], I guess.
                        -- TODO : Right?
+
+
+-- ** functions
 
 key_xy_map :: Map Key (X,Y)
 key_xy_map = M.fromList [
