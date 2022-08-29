@@ -1,8 +1,19 @@
 # How to use this
 
-Load the project in GHCI (the Haskell interpreter).
-I prefer to do that by running `cabal repl` from the root folder,
-but there are other ways.
+## Step 1: Load this project into GHCI
+
+You'll need to install `GHC` (the Glascow Haskell Compiler, i.e. Haskell)
+and `cabal-install` (a dependency manager for Haskell).
+That's described here:
+
+https://www.haskell.org/downloads/
+
+Once that works, download this project,
+and run `cabal repl` from the root of the project.
+That will drop you into GHCI.
+
+
+## Step 2: Once you've loaded the project in GHCI
 
 Evaluate `go edo right_step downright_step`, where
 * `edo` is your chosen division of the octave
