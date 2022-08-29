@@ -1,4 +1,4 @@
-module Data where
+module Layout where
 
 import           Data.Map (Map)
 import qualified Data.Map   as M
