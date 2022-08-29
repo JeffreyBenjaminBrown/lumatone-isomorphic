@@ -31,14 +31,14 @@ board_key_to_xy (b,k) =
 -- This does not need an Edo argument,
 -- because the EdoNote is not provided modulo the Edo.
 xy_to_edoNote :: EdoNote -> EdoNote -> (X,Y) -> Int
-xy_to_edoNote right_step downleft_step (x,y) =
-  right_step * x + downleft_step * y
+xy_to_edoNote right_step downright_step (x,y) =
+  right_step * x + downright_step * y
 
 board_edoNotes ::
   EdoNote -> EdoNote -> Map (Board, Key) EdoNote
-board_edoNotes right_step downleft_step =
+board_edoNotes right_step downright_step =
   let f :: (Board, Key) -> EdoNote
-      f = xy_to_edoNote right_step downleft_step
+      f = xy_to_edoNote right_step downright_step
           . board_key_to_xy
   in M.fromList $ map (\bk -> (bk, f bk)) board_keys
 
@@ -62,9 +62,9 @@ edoNote_to_keyData e en = let
                keyColor   = color midiNote }
 
 lumatone :: Edo -> EdoNote -> EdoNote -> Map (Board, Key) KeyData
-lumatone edo right_step downleft_step = let
+lumatone edo right_step downright_step = let
   m_bk_e :: Map (Board,Key) EdoNote
-  m_bk_e = board_edoNotes right_step downleft_step
+  m_bk_e = board_edoNotes right_step downright_step
   in nonnegative_keyData $ M.map (edoNote_to_keyData edo) m_bk_e
 
 -- TODO ? Check, then formalize this test.
@@ -87,3 +87,22 @@ boardStrings b m = let
       let kd = maybe (error "boardStrings lookup failed") id
                $ M.lookup (b,k) m ]
   in first : rest
+
+go :: Edo -> EdoNote -> EdoNote -> IO (Map (Board, Key) KeyData)
+go edo right_step downright_step = do
+  let
+    l :: Map (Board, Key) KeyData
+    l = lumatone edo right_step downright_step
+    s :: [String]
+    s = concat [ boardStrings b l
+               | b <- [0..4] ]
+    output_path :: String
+    output_path = "output/" ++
+                  ( -- basename
+                    show edo ++ "edo-" ++
+                    show right_step ++ "r-" ++
+                    show downright_step ++ "dl.ltn" )
+  t :: [String] <-
+    lines <$> readFile "data/tail.txt"
+  writeFile output_path $ unlines $ s ++ t
+  return l
