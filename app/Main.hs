@@ -10,6 +10,11 @@ import           Test.HUnit
 import Types
 import Data
 
+
+main :: IO ()
+main = putStrLn "Hello."
+
+
 -- ** Tests with no library dependencies
 
 runTests = mapM_ (putStrLn . show) $
@@ -52,8 +57,9 @@ test_xy_to_edoNote :: [Bool]
 test_xy_to_edoNote =
   [ xy_to_edoNote 5 3 (5,2) == 31 ] -- 31-edo Bosanquet, first octave
 
-board_edoNotes :: Map (Board, Key) EdoNote
-board_edoNotes =
+board_edoNotes :: EdoNote -> EdoNote -> Map (Board, Key) EdoNote
+board_edoNotes right_step downleft_step =
   let f :: (Board, Key) -> EdoNote
-      f = xy_to_edoNote . board_key_to_xy
-  in M.fromList $ map f board_keys
+      f = xy_to_edoNote right_step downleft_step
+          . board_key_to_xy
+  in M.fromList $ map (\bk -> (bk, f bk)) board_keys
