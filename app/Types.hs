@@ -1,11 +1,11 @@
 module Types where
 
 
-type Board = Int -- ^ The Lumatone has five boards, numbered 0 through 4.
+type Board = Int -- ^ The Lumatone has five Boards, numbered 0 through 4.
 
 type Key = Int -- ^ Each Board has 56 keys, numbered 0 to 55.
--- Refer to this picture on p. 28 of the Lumatone manual for which is where:
--- [[~/many-small/music-making/lumatone/2022-08-27-stl4uf7J.one-lumatone-octave.png]]
+-- Refer to the file "data/2022-08-27-stl4uf7J.one-lumatone-octave.png"
+-- to see which button falls where.
 
 data KeyData = KeyData {
   keyChannel :: MidiChannel,

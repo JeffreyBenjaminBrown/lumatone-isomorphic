@@ -39,12 +39,3 @@ You can use the Lumatone editor to change those things.
 `41edo-6r-1dl.ltn` is the reason I wrote this program.
 It's almost as compact as Bosanquet but a little wider and a little flatter,
 to avoid the need for weird and/or impossible voicings.
-
-
-# Personal: Some reference data on my machine
-
-## An example Lumatone .ltn file
-~/non-nix-apps/Lumatone-Editor-1.0.2/Presets/Mappings/31ET-bosanquet.default.ltn
-
-## A picture of one of the five boards on a Lumatone
-~/many-small/music-making/lumatone/2022-08-27-stl4uf7J.one-lumatone-octave.png
