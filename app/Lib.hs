@@ -66,3 +66,24 @@ lumatone edo right_step downleft_step = let
   m_bk_e :: Map (Board,Key) EdoNote
   m_bk_e = board_edoNotes right_step downleft_step
   in nonnegative_keyData $ M.map (edoNote_to_keyData edo) m_bk_e
+
+-- TODO ? Check, then formalize this test.
+-- l = lumatone 41 7 3
+-- (b,k) = (2,3)
+-- kd = maybe (error "") id $ M.lookup (b,k) l
+-- keyStrings k kd
+keyStrings :: Key -> KeyData -> [String]
+keyStrings k kd =
+  [ "Key_"  ++ show k ++ "=" ++ show (keyNote    kd),
+    "Chan_" ++ show k ++ "=" ++ show (keyChannel kd),
+    "Col_"  ++ show k ++ "=" ++ show (keyColor   kd) ]
+
+boardStrings :: Board -> Map (Board,Key) KeyData -> [String]
+boardStrings b m = let
+  first :: String = "[Board" ++ show b ++ "]"
+  rest :: [String] = concat
+    [ keyStrings k kd
+    | k <- [0..55],
+      let kd = maybe (error "boardStrings lookup failed") id
+               $ M.lookup (b,k) m ]
+  in first : rest

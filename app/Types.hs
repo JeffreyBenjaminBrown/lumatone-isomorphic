@@ -25,3 +25,4 @@ type MidiChannel = Int -- ^ A value in [0,15], I guess.
                        -- TODO : Right?
 
 type Color = String
+type Filename = String
