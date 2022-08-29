@@ -1,14 +1,20 @@
 module Test where
 
-import Test.HUnit
+import           Data.Map (Map)
+import qualified Data.Map   as M
+import           Test.HUnit
 
 import Lib
+import Types
 
 
 allTests :: IO Counts
 allTests = runTestTT $ TestList
   [ test_board_key_to_xy
-  , test_xy_to_edoNote ]
+  , test_xy_to_edoNote
+  , test_board_edoNotes
+  , test_edoNote_to_keyData
+  ]
 
 test_board_key_to_xy :: Test
 test_board_key_to_xy = TestCase $ do
@@ -21,3 +27,28 @@ test_xy_to_edoNote :: Test
 test_xy_to_edoNote = TestCase $ do
   assertBool "31-edo Bosanquet, first octave" $
     Lib.xy_to_edoNote 5 3 (5,2) == 31
+
+test_board_edoNotes :: Test
+test_board_edoNotes = TestCase $ do
+  let luma31 :: Map (Board, Key) EdoNote
+      luma31 = board_edoNotes 5 3
+  assertBool "key 0"         $ M.lookup (0,0) luma31 == Just 0
+  assertBool "key 1"         $ M.lookup (0,1) luma31 == Just 5
+  assertBool "key 2"         $ M.lookup (0,2) luma31 == Just 3
+  assertBool "octave"        $ M.lookup (1,0) luma31 == Just 31
+  assertBool "octave + 8\31" $ M.lookup (1,3) luma31 == Just (31 + 8)
+  assertBool "2 octaves"     $ M.lookup (2,0) luma31 == Just 62
+
+test_edoNote_to_keyData :: Test
+test_edoNote_to_keyData = TestCase $ do
+  let kd = edoNote_to_keyData 31 13
+  assertBool "channel" $ keyChannel kd == 0
+  assertBool "note"    $ keyNote    kd == 13
+  assertBool "color"   $ keyColor   kd == "000000"
+    -- PITFALL: Kludgey. Works b/c 13 is not a key in the color_map.
+
+  let kd = edoNote_to_keyData 31 (31 + 13)
+  assertBool "channel" $ keyChannel kd == 1
+  assertBool "note"    $ keyNote    kd == 13
+  assertBool "color"   $ keyColor   kd == "000000"
+    -- PITFALL: Kludgey. Works b/c 13 is not a key in the color_map.

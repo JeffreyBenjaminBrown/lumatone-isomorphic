@@ -6,6 +6,7 @@ import           Data.Map (Map)
 import qualified Data.Map   as M
 import           Data.Maybe as Mb
 
+import Colors
 import Layout
 import Types
 
@@ -27,6 +28,8 @@ board_key_to_xy (b,k) =
                          $ M.lookup k Layout.key_xy_map
   in addXY (mulXY b (5,2)) base_xy
 
+-- This does not need an Edo argument,
+-- because the EdoNote is not provided modulo the Edo.
 xy_to_edoNote :: EdoNote -> EdoNote -> (X,Y) -> Int
 xy_to_edoNote right_step downleft_step (x,y) =
   right_step * x + downleft_step * y
@@ -39,6 +42,27 @@ board_edoNotes right_step downleft_step =
           . board_key_to_xy
   in M.fromList $ map (\bk -> (bk, f bk)) board_keys
 
--- | To be used on the output of `board_edoNotes`
-min_edoNote :: Map (Board, Key) EdoNote -> EdoNote
-min_edoNote = minimum . map snd . M.toList
+nonnegative_keyData :: Map (Board, Key) KeyData
+                    -> Map (Board, Key) KeyData
+nonnegative_keyData l = let
+  min_midiChannel :: MidiChannel
+  min_midiChannel = minimum $ map keyChannel $ M.elems l
+  min_midiNote    :: MidiNote
+  min_midiNote    = minimum $ map keyNote    $ M.elems l
+  subtract_that :: KeyData -> KeyData
+  subtract_that kd = kd { keyNote    = keyNote    kd - min_midiNote,
+                          keyChannel = keyChannel kd - min_midiChannel }
+  in M.map subtract_that l
+
+edoNote_to_keyData :: Edo -> EdoNote -> KeyData
+edoNote_to_keyData e en = let
+  midiNote =                mod en e
+  in KeyData { keyChannel = div en e,
+               keyNote    = midiNote,
+               keyColor   = color midiNote }
+
+lumatone :: Edo -> EdoNote -> EdoNote -> Map (Board, Key) KeyData
+lumatone edo right_step downleft_step = let
+  m_bk_e :: Map (Board,Key) EdoNote
+  m_bk_e = board_edoNotes right_step downleft_step
+  in nonnegative_keyData $ M.map (edoNote_to_keyData edo) m_bk_e
