@@ -13,7 +13,7 @@ and run `cabal repl` from the root of the project.
 That will drop you into GHCI.
 
 
-## Step 2: Once you've loaded the project in GHCI
+## Step 2: Make a layout with it
 
 Evaluate `go edo right_step downright_step`, where
 * `edo` is your chosen division of the octave

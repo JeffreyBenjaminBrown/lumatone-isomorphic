@@ -50,8 +50,11 @@ nonnegative_keyData l = let
   min_midiNote    :: MidiNote
   min_midiNote    = minimum $ map keyNote    $ M.elems l
   subtract_that :: KeyData -> KeyData
-  subtract_that kd = kd { keyNote    = keyNote    kd - min_midiNote,
-                          keyChannel = keyChannel kd - min_midiChannel }
+  subtract_that kd = kd {
+    -- PITFALL: Add 1 to the MIDI Channel because channels are 1-indexed,
+    -- whereas keys are 0-indexed like God intended.
+    keyNote    =     keyNote    kd - min_midiNote,
+    keyChannel = 1 + keyChannel kd - min_midiChannel }
   in M.map subtract_that l
 
 edoNote_to_keyData :: Edo -> EdoNote -> KeyData
