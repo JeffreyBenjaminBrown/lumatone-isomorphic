@@ -11,7 +11,7 @@ color = maybe "000000" id . flip M.lookup color_map
 
 color_map :: Map MidiNote Color
 color_map = M.fromList [
-  ( 0, "ff0000"),
+  ( 0, "ffffff"),
   ( 7, "ff0000"),
   (14, "ff0000"),
   (17, "ff0000"),
@@ -19,7 +19,7 @@ color_map = M.fromList [
   (31, "ff0000"),
   (38, "ff0000"),
 
-  ( 2, "00ff00"),
+  ( 2, "ffffff"),
   ( 9, "00ff00"),
   (16, "00ff00"),
   (19, "00ff00"),
@@ -27,7 +27,7 @@ color_map = M.fromList [
   (33, "00ff00"),
   (40, "00ff00"),
 
-  (4 , "0000ff"),
+  (4 , "ffffff"),
   (11, "0000ff"),
   (18, "0000ff"),
   (21, "0000ff"),
