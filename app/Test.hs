@@ -31,7 +31,7 @@ test_xy_to_edoNote = TestCase $ do
 test_board_edoNotes :: Test
 test_board_edoNotes = TestCase $ do
   let luma31 :: Map (Board, Key) EdoNote
-      luma31 = board_edoNotes 5 3
+      luma31 = board_edoNotes 5 3 0
   assertBool "key 0"         $ M.lookup (0,0) luma31 == Just 0
   assertBool "key 1"         $ M.lookup (0,1) luma31 == Just 5
   assertBool "key 2"         $ M.lookup (0,2) luma31 == Just 3
@@ -41,14 +41,14 @@ test_board_edoNotes = TestCase $ do
 
 test_edoNote_to_keyData :: Test
 test_edoNote_to_keyData = TestCase $ do
-  let kd = edoNote_to_keyData 31 13
+  let kd = edoNote_to_keyData 31 12
   assertBool "channel" $ keyChannel kd == 0
-  assertBool "note"    $ keyNote    kd == 13
+  assertBool "note"    $ keyNote    kd == 12
   assertBool "color"   $ keyColor   kd == "000000"
     -- PITFALL: Kludgey. Works b/c 13 is not a key in the color_map.
 
-  let kd = edoNote_to_keyData 31 (31 + 13)
+  let kd = edoNote_to_keyData 31 (31 + 12)
   assertBool "channel" $ keyChannel kd == 1
-  assertBool "note"    $ keyNote    kd == 13
+  assertBool "note"    $ keyNote    kd == 12
   assertBool "color"   $ keyColor   kd == "000000"
     -- PITFALL: Kludgey. Works b/c 13 is not a key in the color_map.

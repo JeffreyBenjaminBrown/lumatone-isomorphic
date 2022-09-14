@@ -35,11 +35,15 @@ xy_to_edoNote right_step downright_step (x,y) =
   right_step * x + downright_step * y
 
 board_edoNotes ::
-  EdoNote -> EdoNote -> Map (Board, Key) EdoNote
-board_edoNotes right_step downright_step =
+  EdoNote    -- ^ How much pitch changes as one steps right on the keyboard.
+  -> EdoNote -- ^ How much pitch changes as one steps down-right.
+  -> EdoNote -- ^ A nonnegative shift amount for all pitches pitches.
+  -> Map (Board, Key) EdoNote
+board_edoNotes right_step downright_step midi_shift =
   let f :: (Board, Key) -> EdoNote
-      f = xy_to_edoNote right_step downright_step
-          . board_key_to_xy
+      f bk = midi_shift +
+             xy_to_edoNote right_step downright_step
+             (board_key_to_xy bk)
   in M.fromList $ map (\bk -> (bk, f bk)) board_keys
 
 nonnegative_keyData :: Map (Board, Key) KeyData
@@ -64,10 +68,11 @@ edoNote_to_keyData e en = let
                keyNote    = midiNote,
                keyColor   = color midiNote }
 
-lumatone :: Edo -> EdoNote -> EdoNote -> Map (Board, Key) KeyData
-lumatone edo right_step downright_step = let
+lumatone :: Edo -> EdoNote -> EdoNote -> EdoNote
+         -> Map (Board, Key) KeyData
+lumatone edo right_step downright_step midi_shift = let
   m_bk_e :: Map (Board,Key) EdoNote
-  m_bk_e = board_edoNotes right_step downright_step
+  m_bk_e = board_edoNotes right_step downright_step midi_shift
   in nonnegative_keyData $ M.map (edoNote_to_keyData edo) m_bk_e
 
 -- TODO ? Check, then formalize this test.
@@ -91,11 +96,12 @@ boardStrings b m = let
                $ M.lookup (b,k) m ]
   in first : rest
 
-go :: Edo -> EdoNote -> EdoNote -> IO (Map (Board, Key) KeyData)
-go edo right_step downright_step = do
+go :: Edo -> EdoNote -> EdoNote -> EdoNote
+   -> IO (Map (Board, Key) KeyData)
+go edo right_step downright_step midi_shift = do
   let
     l :: Map (Board, Key) KeyData
-    l = lumatone edo right_step downright_step
+    l = lumatone edo right_step downright_step midi_shift
     s :: [String]
     s = concat [ boardStrings b l
                | b <- [0..4] ]
@@ -104,7 +110,13 @@ go edo right_step downright_step = do
                   ( -- basename
                     show edo ++ "edo-" ++
                     show right_step ++ "r-" ++
-                    show downright_step ++ "dl.ltn" )
+                    show downright_step ++ "dl" ++
+                    ( if midi_shift == 0 then ""
+                      else "+" ++ show midi_shift ) ++
+                    ".ltn" )
+  if midi_shift < 0
+    then putStrLn $ "WARNING: midi_Shift (last) argument < 0. Some MIDI pitches will therefore be negative. The result is (I believe) invalid MIDI. Outputting result anyway."
+    else return ()
   t :: [String] <-
     lines <$> readFile "data/tail.txt"
   writeFile output_path $ unlines $ s ++ t
