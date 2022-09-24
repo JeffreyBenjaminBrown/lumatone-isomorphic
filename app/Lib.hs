@@ -30,9 +30,13 @@ board_key_to_xy (b,k) =
 
 -- This does not need an Edo argument,
 -- because the EdoNote is not provided modulo the Edo.
-xy_to_edoNote :: EdoNote -> EdoNote -> (X,Y) -> Int
-xy_to_edoNote right_step downright_step (x,y) =
-  right_step * x + downright_step * y
+xy_to_edoNote ::
+  EdoNote    -- ^ How many steps rightward on the keyboard
+  -> EdoNote -- ^ How many steps down-right on the keyboard
+  -> EdoNote -- ^ A nonnegative shift amount for all pitches pitches.
+  -> (X,Y) -> Int
+xy_to_edoNote right_step downright_step midi_shift (x,y) =
+  right_step * x + downright_step * y + midi_shift
 
 board_edoNotes ::
   EdoNote    -- ^ How much pitch changes as one steps right on the keyboard.
@@ -41,9 +45,8 @@ board_edoNotes ::
   -> Map (Board, Key) EdoNote
 board_edoNotes right_step downright_step midi_shift =
   let f :: (Board, Key) -> EdoNote
-      f bk = midi_shift +
-             xy_to_edoNote right_step downright_step
-             (board_key_to_xy bk)
+      f = xy_to_edoNote right_step downright_step midi_shift
+          . board_key_to_xy
   in M.fromList $ map (\bk -> (bk, f bk)) board_keys
 
 nonnegative_keyData :: Map (Board, Key) KeyData

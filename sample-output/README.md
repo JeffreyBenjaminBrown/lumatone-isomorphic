@@ -14,6 +14,12 @@ They have these names:
 41edo-7r-3dl.ltn
 ```
 
+and were generated via these commands:
+```
+go 41 7 3 9
+go 41 7 3 0
+```
+
 They differ only by a midi_shift value --
 0 in one of them, +9 in the other.
 If something is hard to play in one of them

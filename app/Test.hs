@@ -26,7 +26,9 @@ test_board_key_to_xy = TestCase $ do
 test_xy_to_edoNote :: Test
 test_xy_to_edoNote = TestCase $ do
   assertBool "31-edo Bosanquet, first octave" $
-    Lib.xy_to_edoNote 5 3 (5,2) == 31
+    Lib.xy_to_edoNote 5 3 0   (5,2) == 31
+  assertBool "31-edo Bosanquet, first octave, shifted by 100" $
+    Lib.xy_to_edoNote 5 3 100 (5,2) == 131
 
 test_board_edoNotes :: Test
 test_board_edoNotes = TestCase $ do

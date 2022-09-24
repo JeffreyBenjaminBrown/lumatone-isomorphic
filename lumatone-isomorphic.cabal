@@ -32,6 +32,7 @@ executable lumatone-isomorphic
       Layout,
       Lib,
       Test,
+      Util,
       Types
 
     -- LANGUAGE extensions used by modules in this package.
