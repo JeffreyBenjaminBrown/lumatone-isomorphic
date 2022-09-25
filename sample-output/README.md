@@ -7,7 +7,7 @@ the 31-edo layout that comes with the Lumatone,
 because each octave is on a separate MIDI channel,
 and its MIDI note values lie exclusively in the interval [0,30].
 
-## There are two 41-edo Bosanquet layouts
+## The two 41-edo Bosanquet layouts
 
 They have these names:
 ```
@@ -34,8 +34,36 @@ The other is shifted 1 MIDI channel up,
 so that they are in the same octave.
 The reason that was necessary is described in the main README.
 
+
 ## `41edo.6right.-1downleft.ltn` is a wide, flat 41-edo layout.
 
 I thought it would be cool. Maybe it is.
 I'm happy enough so far with 41-edo's Bosanquet, though,
 that I've barely used it, so I won't try to sell you on it.
+
+This also comes in two versions,
+shifted by a vertical half of a keyboard.
+No channel-shift necessary in this case.
+
+```
+go 41 6 (-1) 0  0
+go 41 6 (-1) 22 0
+```
+
+## The two 50-edo Bosanquet layouts
+
+Again in two versions,
+shifted by a vertical half of a keyboard.
+No channel-shift necessary in this case.
+
+```
+go 50 8 5 0  0
+go 50 8 5 20 0
+```
+
+## The two 53-edo Bosanquet layouts
+
+```
+go 53 9 4 0  1
+go 53 9 4 11 0
+```
