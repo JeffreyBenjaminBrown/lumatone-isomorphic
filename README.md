@@ -5,7 +5,7 @@ by providing only the following four arguments, in order:
 * edo :: A positive integer. The number of divisions of the octave you want.
 * right_step :: An integer. The difference in edo steps from any button to its right neighbor.
 * downright_step :: An integer. The difference in edo steps from any button to its down-left neighbor.
-* midi_shift :: A nonnegative integer. A number of MIDI notes to add to every value. If this is zero, the top-left key will send MIDI note zero.
+* note_shift :: A nonnegative integer. A number of MIDI notes to add to every value. If this is zero, the top-left key will send MIDI note zero.
 * channel_shift = A nonnegative integer. A number of MIDI channels to add to every value. If this is zero, the lowest channel will be 1.
 
 You can also define colors to assign to each EDO value,
@@ -40,7 +40,7 @@ That will drop you into GHCI.
 
 ## Step 2: Make a layout with it
 
-Evaluate the expression `go edo right_step downright_step midi_shift channel_shift`. Write the word `go` literally, but substitute numbers for each of the other terms, as described in the introduction to this README. Any negative number will need to be wrapped in parenthesees.
+Evaluate the expression `go edo right_step downright_step note_shift channel_shift`. Write the word `go` literally, but substitute numbers for each of the other terms, as described in the introduction to this README. Any negative number will need to be wrapped in parenthesees.
 
 Some data will print to the screen. Ignore it.
 
@@ -57,7 +57,7 @@ See the README in that folder to know more about those files.
 
 ## The problem
 
-Consider two nearly identical layouts, differing only in the `midi_shift` value:
+Consider two nearly identical layouts, differing only in the `note_shift` value:
 ```
 go 41 7 3 0 0
 go 41 7 3 9 0
@@ -74,7 +74,7 @@ It results from the following facts:
 
 * By default (i.e., if you set channel_shift to 0),
   the lowest MIDI channel will be 0.
-* By default (i.e. if you set midi_shift to 0),
+* By default (i.e. if you set note_shift to 0),
   the key in the top-left corner will be assigned note 0.
 * The key in the top-left corner is not necessarily
   the lowest note on the keyboard.

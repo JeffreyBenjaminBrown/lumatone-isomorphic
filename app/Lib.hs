@@ -36,17 +36,17 @@ xy_to_edoNote ::
   -> EdoNote -- ^ How many steps down-right on the keyboard
   -> EdoNote -- ^ A nonnegative shift amount for all pitches pitches.
   -> (X,Y) -> Int
-xy_to_edoNote right_step downright_step midi_shift (x,y) =
-  right_step * x + downright_step * y + midi_shift
+xy_to_edoNote right_step downright_step note_shift (x,y) =
+  right_step * x + downright_step * y + note_shift
 
 board_edoNotes ::
   EdoNote    -- ^ How much pitch changes as one steps right on the keyboard.
   -> EdoNote -- ^ How much pitch changes as one steps down-right.
   -> EdoNote -- ^ A nonnegative shift amount for all pitches pitches.
   -> Map (Board, Key) EdoNote
-board_edoNotes right_step downright_step midi_shift =
+board_edoNotes right_step downright_step note_shift =
   let f :: (Board, Key) -> EdoNote
-      f = xy_to_edoNote right_step downright_step midi_shift
+      f = xy_to_edoNote right_step downright_step note_shift
           . board_key_to_xy
   in M.fromList $ map (\bk -> (bk, f bk)) board_keys
 
@@ -83,9 +83,9 @@ shift_channels channel_shift =
 
 lumatone :: Edo -> EdoNote -> EdoNote -> EdoNote -> MidiChannel
          -> Map (Board, Key) KeyData
-lumatone edo right_step downright_step midi_shift channel_shift = let
+lumatone edo right_step downright_step note_shift channel_shift = let
   m_bk_e :: Map (Board,Key) EdoNote
-  m_bk_e = board_edoNotes right_step downright_step midi_shift
+  m_bk_e = board_edoNotes right_step downright_step note_shift
   in shift_channels channel_shift
      $ nonnegative_keyData
      $ M.map (edoNote_to_keyData edo) m_bk_e
@@ -112,32 +112,32 @@ boardStrings b m = let
   in first : rest
 
 output_path :: Edo -> EdoNote -> EdoNote -> EdoNote -> MidiChannel -> String
-output_path edo right_step downright_step midi_shift channel_shift =
+output_path edo right_step downright_step note_shift channel_shift =
   "output/" ++ concat
   ( L.intersperse "." -- basename
     $ filter (/= "")
     [ show edo ++ "edo"
     , show right_step ++ "right"
     , show downright_step ++ "downleft"
-    , if midi_shift == 0 then ""
-      else "+" ++ show midi_shift ++ "notes"
+    , if note_shift == 0 then ""
+      else "+" ++ show note_shift ++ "notes"
     , if channel_shift == 0 then ""
       else "+" ++ show channel_shift ++ "channels"
     , "ltn" ] )
 
 go :: Edo -> EdoNote -> EdoNote -> EdoNote -> MidiChannel
    -> IO (Map (Board, Key) KeyData)
-go edo right_step downright_step midi_shift channel_shift = do
+go edo right_step downright_step note_shift channel_shift = do
   let
     l :: Map (Board, Key) KeyData =
-      lumatone edo right_step downright_step midi_shift channel_shift
+      lumatone edo right_step downright_step note_shift channel_shift
     s :: [String] =
       concat [ boardStrings b l
              | b <- [0..4] ]
     p :: String =
-      output_path edo right_step downright_step midi_shift channel_shift
-  if midi_shift < 0 || channel_shift < 0
-    then putStrLn $ "WARNING: At least one of the arguments midi_shift and channel_shift is < 0. Some values will therefore be negative. The result is (I believe) invalid MIDI. Outputting result despite this madness."
+      output_path edo right_step downright_step note_shift channel_shift
+  if note_shift < 0 || channel_shift < 0
+    then putStrLn $ "WARNING: At least one of the arguments note_shift and channel_shift is < 0. Some values will therefore be negative. The result is (I believe) invalid MIDI. Outputting result despite this madness."
     else return ()
   t :: [String] <-
     lines <$> readFile "data/tail.txt"
