@@ -7,13 +7,22 @@ import Types
 
 
 color :: MidiNote -> Color
-color = maybe "000000" id . flip M.lookup color_map
+color = maybe default_color id . flip M.lookup color_map
 
--- PITFALL: These work out nicely for 41-edo.
--- For some other edo, they might not.
+-- | This, the default color,
+-- which will be applied to every EDO value for which
+-- `color_map` does not define a color.
+default_color :: String
+default_color = "000000"
+
+-- | This assigns colors to EDO values.
+-- Not every EDO value needs to have a color assigned,
+-- and they do not need to be defined in order.
+--
+-- These colors work out nicely for Bosanquet 41-edo.
+-- For some other edo and/or layout, they might not.
 color_map :: Map MidiNote Color
 color_map = M.fromList [
-  -- "naturals"
   ( 0, "aaaaaa"),
   ( 7, "ff0000"),
   (14, "ff0000"),
