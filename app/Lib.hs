@@ -2,8 +2,9 @@
 
 module Lib where
 
-import           Data.Map (Map)
+import qualified Data.List  as L
 import qualified Data.Map   as M
+import           Data.Map (Map)
 import           Data.Maybe as Mb
 
 import Colors
@@ -71,12 +72,23 @@ edoNote_to_keyData e en = let
                keyNote    = midiNote,
                keyColor   = color midiNote }
 
-lumatone :: Edo -> EdoNote -> EdoNote -> EdoNote
+shift_channels ::
+  MidiChannel
+  -> Map (Board, Key) KeyData
+  -> Map (Board, Key) KeyData
+shift_channels channel_shift =
+  let f :: KeyData -> KeyData
+      f kd = kd { keyChannel = keyChannel kd + channel_shift }
+  in M.map f
+
+lumatone :: Edo -> EdoNote -> EdoNote -> EdoNote -> MidiChannel
          -> Map (Board, Key) KeyData
-lumatone edo right_step downright_step midi_shift = let
+lumatone edo right_step downright_step midi_shift channel_shift = let
   m_bk_e :: Map (Board,Key) EdoNote
   m_bk_e = board_edoNotes right_step downright_step midi_shift
-  in nonnegative_keyData $ M.map (edoNote_to_keyData edo) m_bk_e
+  in shift_channels channel_shift
+     $ nonnegative_keyData
+     $ M.map (edoNote_to_keyData edo) m_bk_e
 
 -- TODO ? Check, then formalize this test.
 -- l = lumatone 41 7 3
@@ -99,28 +111,35 @@ boardStrings b m = let
                $ M.lookup (b,k) m ]
   in first : rest
 
-go :: Edo -> EdoNote -> EdoNote -> EdoNote
+output_path :: Edo -> EdoNote -> EdoNote -> EdoNote -> MidiChannel -> String
+output_path edo right_step downright_step midi_shift channel_shift =
+  "output/" ++ concat
+  ( L.intersperse "." -- basename
+    $ filter (/= "")
+    [ show edo ++ "edo"
+    , show right_step ++ "right"
+    , show downright_step ++ "downleft"
+    , if midi_shift == 0 then ""
+      else "+" ++ show midi_shift ++ "notes"
+    , if channel_shift == 0 then ""
+      else "+" ++ show channel_shift ++ "channels"
+    , "ltn" ] )
+
+go :: Edo -> EdoNote -> EdoNote -> EdoNote -> MidiChannel
    -> IO (Map (Board, Key) KeyData)
-go edo right_step downright_step midi_shift = do
+go edo right_step downright_step midi_shift channel_shift = do
   let
-    l :: Map (Board, Key) KeyData
-    l = lumatone edo right_step downright_step midi_shift
-    s :: [String]
-    s = concat [ boardStrings b l
-               | b <- [0..4] ]
-    output_path :: String
-    output_path = "output/" ++
-                  ( -- basename
-                    show edo ++ "edo-" ++
-                    show right_step ++ "r-" ++
-                    show downright_step ++ "dl" ++
-                    ( if midi_shift == 0 then ""
-                      else "+" ++ show midi_shift ) ++
-                    ".ltn" )
-  if midi_shift < 0
-    then putStrLn $ "WARNING: midi_Shift (last) argument < 0. Some MIDI pitches will therefore be negative. The result is (I believe) invalid MIDI. Outputting result anyway."
+    l :: Map (Board, Key) KeyData =
+      lumatone edo right_step downright_step midi_shift channel_shift
+    s :: [String] =
+      concat [ boardStrings b l
+             | b <- [0..4] ]
+    p :: String =
+      output_path edo right_step downright_step midi_shift channel_shift
+  if midi_shift < 0 || channel_shift < 0
+    then putStrLn $ "WARNING: At least one of the arguments midi_shift and channel_shift is < 0. Some values will therefore be negative. The result is (I believe) invalid MIDI. Outputting result despite this madness."
     else return ()
   t :: [String] <-
     lines <$> readFile "data/tail.txt"
-  writeFile output_path $ unlines $ s ++ t
+  writeFile p $ unlines $ s ++ t
   return l

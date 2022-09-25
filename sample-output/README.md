@@ -16,8 +16,8 @@ They have these names:
 
 and were generated via these commands:
 ```
-go 41 7 3 9
-go 41 7 3 0
+go 41 7 3 9 0
+go 41 7 3 0 1
 ```
 
 They differ only by a midi_shift value --
