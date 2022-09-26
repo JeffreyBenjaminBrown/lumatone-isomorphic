@@ -1,9 +1,14 @@
 # What these layouts are
 
-## `31edo.5right.3downleft.ltn` is standard 31-edo Bosanquet.
+## The 31-edo Bosanquet layout
 
-It's more readable than
-the 31-edo layout that comes with the Lumatone,
+It's called `31edo.5right.3downleft.ltn`.
+It doesn't do anything the Lumatone's builtin
+31-edo Bosanquet layout doesn't do,
+but it was a useful proof of concept.
+
+This layout offers the minor advantage of
+being readable than that builtin layout,
 because each octave is on a separate MIDI channel,
 and its MIDI note values lie exclusively in the interval [0,30].
 
@@ -17,8 +22,8 @@ They have these names:
 
 and were generated via these commands:
 ```
-go 41 7 3 0 1
-go 41 7 3 9 0
+go 41 7 3 0 0
+go 41 7 3 9 1
 ```
 
 If something is hard to play in one of them
@@ -29,10 +34,9 @@ which is shifted vertically by about half a keyboard.
 that depends on both the EDO and the layout.
 In the case of 41-edo Bosanquet, it is.)
 
-One of the layouts is shifted 9 MIDI notes up.
-The other is shifted 1 MIDI channel up,
-so that they are in the same octave.
-The reason that was necessary is described in the main README.
+One of the layouts is shifted 9 MIDI notes and 1 MIDI channel up.
+That's so the two layouts are in the same octave.
+The reason that's necessary is described in the main README.
 
 
 ## `41edo.6right.-1downleft.ltn` is a wide, flat 41-edo layout.
@@ -50,6 +54,16 @@ go 41 6 (-1) 0  0
 go 41 6 (-1) 22 0
 ```
 
+## The 46-edo layout
+
+```
+go 46 5 2 0 0
+```
+
+Wider and flatter than Bosanquet.
+Slightly diagonal.
+
+
 ## The two 50-edo Bosanquet layouts
 
 Again in two versions,
@@ -64,6 +78,6 @@ go 50 8 5 20 0
 ## The two 53-edo Bosanquet layouts
 
 ```
-go 53 9 4 0  1
-go 53 9 4 11 0
+go 53 9 4 0  0
+go 53 9 4 11 1
 ```
