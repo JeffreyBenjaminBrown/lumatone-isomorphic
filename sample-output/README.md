@@ -57,11 +57,11 @@ go 41 6 (-1) 22 0
 ## The 46-edo layout
 
 ```
-go 46 5 2 0 0
+go 46 5 7 0 0
 ```
 
 Wider and flatter than Bosanquet.
-Slightly diagonal.
+Very slightly diagonal (half a button every octave).
 
 
 ## The two 50-edo Bosanquet layouts

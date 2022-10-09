@@ -125,7 +125,11 @@ output_path edo right_step downright_step note_shift channel_shift =
       else "+" ++ show channel_shift ++ "channels"
     , "ltn" ] )
 
-go :: Edo -> EdoNote -> EdoNote -> EdoNote -> MidiChannel
+go :: Edo
+   -> EdoNote     -- ^ rightward step
+   -> EdoNote     -- ^ down-left step
+   -> EdoNote     -- ^ midi note shift
+   -> MidiChannel -- ^ midi channel shift
    -> IO (Map (Board, Key) KeyData)
 go edo right_step downright_step note_shift channel_shift = do
   let
