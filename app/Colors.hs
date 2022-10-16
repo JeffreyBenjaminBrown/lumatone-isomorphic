@@ -22,7 +22,8 @@ default_color = "000000"
 -- These colors work out nicely for Bosanquet 41-edo.
 -- For some other edo and/or layout, they might not.
 color_map :: Map MidiNote Color
-color_map = M.fromList [
+color_map = M.fromList $
+  map (\(a,b) -> (mod a 41,b)) $ [
   ( 0, "aaaaaa"),
   ( 7, "ff0000"),
   (14, "ff0000"),
@@ -47,10 +48,10 @@ color_map = M.fromList [
   (33, "0000ff"),
   (40, "0000ff"),
 
-  ( 3, "aaaaaa"),
+  (-4, "aaaaaa"),
+  ( 3, "aaaa00"),
   (10, "aaaa00"),
-  (17, "aaaa00"),
+  (13, "aaaa00"),
   (20, "aaaa00"),
   (27, "aaaa00"),
-  (34, "aaaa00"),
-  (41, "aaaa00") ]
+  (34, "aaaa00") ]
