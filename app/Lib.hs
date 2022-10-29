@@ -118,7 +118,7 @@ output_path edo right_step downright_step note_shift channel_shift =
     $ filter (/= "")
     [ show edo ++ "edo"
     , show right_step ++ "right"
-    , show downright_step ++ "downleft"
+    , show downright_step ++ "downright"
     , if note_shift == 0 then ""
       else "+" ++ show note_shift ++ "notes"
     , if channel_shift == 0 then ""
@@ -127,7 +127,7 @@ output_path edo right_step downright_step note_shift channel_shift =
 
 go :: Edo
    -> EdoNote     -- ^ rightward step
-   -> EdoNote     -- ^ down-left step
+   -> EdoNote     -- ^ down-right step
    -> EdoNote     -- ^ midi note shift
    -> MidiChannel -- ^ midi channel shift
    -> IO (Map (Board, Key) KeyData)
