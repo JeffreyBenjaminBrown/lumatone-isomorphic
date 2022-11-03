@@ -70,7 +70,7 @@ edoNote_to_keyData e en = let
   midiNote =                mod en e
   in KeyData { keyChannel = div en e,
                keyNote    = midiNote,
-               keyColor   = color midiNote }
+               keyColor   = color e midiNote }
 
 shift_channels ::
   MidiChannel

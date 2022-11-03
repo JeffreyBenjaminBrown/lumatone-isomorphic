@@ -81,3 +81,23 @@ go 50 8 5 20 0
 go 53 9 4 0  0
 go 53 9 4 11 1
 ```
+
+# In brief, how I generated the latest data
+
+```
+-- go edo right_step downright_step note_shift channel_shift
+go 12 4    5  60 0
+go 24 5    4   0 0
+go 31 5    3   0 0
+go 41 6 (-1)  22 0
+go 41 6 (-1)   0 0
+go 41 7    3   9 1
+go 41 7    3   0 0
+go 46 5    7   0 0
+go 50 8    5  20 0
+go 50 8    5   0 0
+go 53 9    4  11 1
+go 53 9    4   0 0
+go 58 6    11  0 0
+go 58 6    11 15 0
+```
