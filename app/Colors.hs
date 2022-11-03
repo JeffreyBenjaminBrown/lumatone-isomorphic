@@ -74,7 +74,7 @@ colors_for_31_edo = chains_to_note_colors $
 
 colors_for_41_edo :: [(MidiNote, Color)]
 colors_for_41_edo = chains_to_note_colors $
-                    chains_of_fifths 41 24 4 4
+                    chains_of_fifths 41 24 4 5
 
 colors_for_46_edo :: [(MidiNote, Color)]
 colors_for_46_edo = chains_to_note_colors $
