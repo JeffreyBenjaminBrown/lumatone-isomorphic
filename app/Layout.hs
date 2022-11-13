@@ -6,6 +6,7 @@ import qualified Data.Map   as M
 import Types
 
 
+-- | The idea in `key_xy_map` is to provide (x,y) coordinates for each key of the Lumatone. I'm calling the top-left corner is (0,0), because that is for some reason standard in computer graphics. Moving right increases x by 1, and moving down-left increases y by 1. Therefore there are a few keys with y-coordinates "behind" the origin -- that is, to the left of it in this coordinate system, albeit not in reality.
 key_xy_map :: Map Key (X,Y)
 key_xy_map = M.fromList [
   ( 0, ( 0, 0)),
