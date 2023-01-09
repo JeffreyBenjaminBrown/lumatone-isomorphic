@@ -12,8 +12,9 @@ being readable than that builtin layout,
 because each octave is on a separate MIDI channel,
 and its MIDI note values lie exclusively in the interval [0,30].
 
-## The two 41-edo Bosanquet layouts
+## The 41-edo Bosanquet layout
 
+There are two of them, which are equal except for pitch shift.
 They have these names:
 ```
 41edo.7right.3downleft.+1channels.ltn
@@ -28,8 +29,7 @@ go 41 7 3 9 1
 
 If something is hard to play in one of them
 (because your hand is up against the top or bottom edge of the keyboard),
-it should be easier to play in the other,
-which is shifted vertically by about half a keyboard.
+it should be easier to play in the other.
 (9 EDO steps not always half a keyboard's width --
 that depends on both the EDO and the layout.
 In the case of 41-edo Bosanquet, it is.)
@@ -46,29 +46,47 @@ I'm happy enough so far with 41-edo's Bosanquet, though,
 that I've barely used it, so I won't try to sell you on it.
 
 This also comes in two versions,
-shifted by a vertical half of a keyboard.
-No channel-shift necessary in this case.
+equal except that one has been pitch-shifted
+by a vertical half of a keyboard.
 
 ```
 go 41 6 (-1) 0  0
 go 41 6 (-1) 22 0
 ```
 
-## The 46-edo layout
+## The 46-edo layouts
+
+Both are wider and flatter than Bosanquet,
+and slightly diagonal (half a button every octave).
+
+### 5\46 x 7\46
+
+This is more diagonal than the other one.
 
 ```
 go 46 5 7 0 0
 ```
 
-Wider and flatter than Bosanquet.
-Very slightly diagonal (half a button every octave).
+### 4\46 right x 11\46 downleft (a.k.a. 4\46 right x 7\46 down)
 
+This layout also comes in three versions,
+equivalent except for the amount by which they have been shifted
+(which is 14\46, i.e. two vertical spaces,
+i.e. roughly 1/3 of the pattern's total height).
+Each is called `46edo.4right.11downright.*.ltn`
+for some value of `*`.
+These are the commands that generated them:
+
+```
+go 46 4 11  1 0
+go 46 4 11 15 0
+go 46 4 11 29 0
+```
 
 ## The two 50-edo Bosanquet layouts
 
-Again in two versions,
+Again two versions of the same layout,
 shifted by a vertical half of a keyboard.
-No channel-shift necessary in this case.
 
 ```
 go 50 8 5 0  0
@@ -76,6 +94,9 @@ go 50 8 5 20 0
 ```
 
 ## The two 53-edo Bosanquet layouts
+
+Again two versions of the same layout,
+shifted by a vertical half of a keyboard.
 
 ```
 go 53 9 4 0  0
@@ -89,19 +110,22 @@ so that it can be sensibly line-sorted in Emacs.)
 
 ```
 -- go edo right_step downright_step note_shift channel_shift
-go 12 4    5  60 00
-go 24 5    4  00 00
-go 31 5    3  00 00
+go 12 4   05  60 00
+go 24 5   04  00 00
+go 31 5   03  00 00
 go 41 6 (-1)  00 00
 go 41 6 (-1)  22 00
-go 41 7    3   9  1
-go 41 7    3  00 00
-go 46 5    7  00 00
-go 46 5    7  13 00
-go 50 8    5  00 00
-go 50 8    5  20 00
-go 53 9    4  00 00
-go 53 9    4  11  1
-go 58 6    11 00 00
-go 58 6    11 26 00
+go 41 7   03  09 01
+go 41 7   03  00 00
+go 46 5   07  00 00
+go 46 5   07  13 00
+go 46 4   11  01 00
+go 46 4   11  15 00
+go 46 4   11  29 00
+go 50 8   05  00 00
+go 50 8   05  20 00
+go 53 9   04  00 00
+go 53 9   04  11 01
+go 58 6   11  00 00
+go 58 6   11  26 00
 ```
