@@ -16,7 +16,7 @@ black     = "000000"
 color_b   = "0000ff"
 color_g   = "00ff00"
 color_r   = "ff0000"
-color_gb  = "00bbbb"
+color_gb  = "00bbbb" -- PITFALL: Very close to both blue and white.
 color_rb  = "bb00bb"
 color_rg  = "bbbb00"
 
