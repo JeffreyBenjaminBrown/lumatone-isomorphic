@@ -59,14 +59,6 @@ go 41 6 (-1) 22 0
 Both are wider and flatter than Bosanquet,
 and slightly diagonal (half a button every octave).
 
-### 5\46 x 7\46
-
-This is more diagonal than the other one.
-
-```
-go 46 5 7 0 0
-```
-
 ### 4\46 right x 11\46 downleft (a.k.a. 4\46 right x 7\46 down)
 
 This layout also comes in three versions,
@@ -81,6 +73,15 @@ These are the commands that generated them:
 go 46 4 11  1 0
 go 46 4 11 15 0
 go 46 4 11 29 0
+```
+
+### 5\46 x 7\46
+
+This is more diagonal than the other one (4\46 right x 11\46 downleft),
+and taller, so I prefer the other one.
+
+```
+go 46 5 7 0 0
 ```
 
 ## The two 50-edo Bosanquet layouts
