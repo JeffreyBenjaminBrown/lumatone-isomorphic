@@ -127,6 +127,6 @@ chains_to_note_colors = map f where
   f :: (EdoNote, (Int,Int)) -> (MidiNote, Color)
   f (note, (group, position)) =
     (note, if position == 0
-           then white_max
-           else maybe black id $
+           then color_white
+           else maybe color_black id $
                 M.lookup group colors )
