@@ -6,10 +6,11 @@ import           Data.Set (Set)
 import qualified Data.Set   as S
 
 import Colors.Simple
+import Colors.Edo34
 import Colors.Edo46 {- | PITFALL: For at least non-Bosanquet layouts
   (and maybe even some Bosanquet ones --
   I only remember having tested with 41-edo and 53-edo)
-  `chains_of_fifths` turns out not to be very useful.
+  the function `chains_of_fifths` turns out not to be very useful.
   It defines chains of fifths well enough,
   but nothing guarantees that the white notes that start each chain
   form a pattern that repeats recognizably every octave,
@@ -48,10 +49,15 @@ color_maps :: Map Edo (Map MidiNote Color)
 color_maps = M.map M.fromList $ M.fromList $ [
   (31, colors_for_31_edo),
   (41, colors_for_41_edo),
-  (46, Colors.Edo46.theMap), -- See the comment on the corresponding import statement for why this line differs from the others.
   (50, colors_for_50_edo),
   (53, colors_for_53_edo),
-  (58, colors_for_58_edo) ]
+  (58, colors_for_58_edo)
+
+  -- See the comment on the corresponding import statements
+  -- for why the lines below differ from the lines above.
+  (34, Colors.Edo34.theMap),
+  (46, Colors.Edo46.theMap),
+  ]
 
 colors_for_31_edo :: [(MidiNote, Color)]
 colors_for_31_edo = chains_to_note_colors $
