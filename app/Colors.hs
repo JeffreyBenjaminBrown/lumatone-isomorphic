@@ -51,12 +51,12 @@ color_maps = M.map M.fromList $ M.fromList $ [
   (41, colors_for_41_edo),
   (50, colors_for_50_edo),
   (53, colors_for_53_edo),
-  (58, colors_for_58_edo)
+  (58, colors_for_58_edo),
 
   -- See the comment on the corresponding import statements
   -- for why the lines below differ from the lines above.
   (34, Colors.Edo34.theMap),
-  (46, Colors.Edo46.theMap),
+  (46, Colors.Edo46.theMap)
   ]
 
 colors_for_31_edo :: [(MidiNote, Color)]
