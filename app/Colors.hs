@@ -1,5 +1,6 @@
 module Colors where
 
+import           Data.List.Extra (maximumOn)
 import           Data.Map (Map)
 import qualified Data.Map   as M
 import           Data.Set (Set)
@@ -21,6 +22,24 @@ import Colors.Edo46 {- | PITFALL: For at least non-Bosanquet layouts
   -}
 import Types
 
+
+{- | How much space (in the edo) to put
+between equally-spaced chains of fifths
+to maximize the number that fit on the Lumatone without overlapping.
+-}
+chainOfFifths_spacingMenu
+  :: Edo
+  -> Int -- ^ How big a fifth is. TODO: Automate.
+  -> Int {- ^ Number of chains.
+              Choice of this is more art than science currently. -}
+  -> [(Int,Int)]
+chainOfFifths_spacingMenu edo fifth nChains =
+  let x z = S.toList $ S.fromList $
+            concat [ [ mod (i*fifth + j*z) edo
+                     | i <- [0..6] ]
+                   | j <- [0..7] ]
+  in [ (z, length $ x z)
+     | z <- [1.. edo `div` 2] ]
 
 -- * Mapping notes to colors
 
