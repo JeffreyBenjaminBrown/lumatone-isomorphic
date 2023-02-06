@@ -7,20 +7,26 @@ import           Data.Set (Set)
 import qualified Data.Set   as S
 
 import Colors.Simple
-import Colors.Edo34
-import Colors.Edo46 {- | PITFALL: For at least non-Bosanquet layouts
-  (and maybe even some Bosanquet ones --
-  I only remember having tested with 41-edo and 53-edo)
-  the function `chains_of_fifths` turns out not to be very useful.
-  It defines chains of fifths well enough,
-  but nothing guarantees that the white notes that start each chain
-  form a pattern that repeats recognizably every octave,
-  the way it does for the Bosanquet layouts I've tested.
-  For this reason I've defined a color map for 46-edo "by hand" (-ish).
-  That's probably the way to go with other edos,
-  if the default colors are confusing.
-  -}
 import Types
+
+{- | PITFALL:
+I defined color maps for the following edos "by hand" (-ish).
+
+That's because, at least for non-Bosanquet layouts
+(and maybe even some Bosanquet ones --
+I only remember having tested with 41-edo and 53-edo)
+the function `chains_of_fifths` turns out not to be very useful.
+It defines chains of fifths well enough,
+but nothing guarantees that the white notes that start each chain
+form a pattern that repeats recognizably every octave,
+the way it does for the Bosanquet layouts I've tested.
+
+This is probably the way to go with other edos, too,
+if their default colors are confusing.
+-}
+import Colors.Edo34
+import Colors.Edo46
+import Colors.Edo58
 
 
 {- | How much space (in the edo) to put
@@ -70,12 +76,12 @@ color_maps = M.map M.fromList $ M.fromList $ [
   (41, colors_for_41_edo),
   (50, colors_for_50_edo),
   (53, colors_for_53_edo),
-  (58, colors_for_58_edo),
 
   -- See the comment on the corresponding import statements
   -- for why the lines below differ from the lines above.
   (34, Colors.Edo34.theMap),
-  (46, Colors.Edo46.theMap)
+  (46, Colors.Edo46.theMap),
+  (58, Colors.Edo58.theMap)
   ]
 
 colors_for_31_edo :: [(MidiNote, Color)]
@@ -93,10 +99,6 @@ colors_for_50_edo = chains_to_note_colors $
 colors_for_53_edo :: [(MidiNote, Color)]
 colors_for_53_edo = chains_to_note_colors $
                     chains_of_fifths 53 31 5 7
-
-colors_for_58_edo :: [(MidiNote, Color)]
-colors_for_58_edo = chains_to_note_colors $
-                    chains_of_fifths 58 34 3 7
 
 
 -- * Note chains
