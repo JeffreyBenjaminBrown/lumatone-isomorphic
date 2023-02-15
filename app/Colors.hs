@@ -31,9 +31,24 @@ import Colors.Edo58
 import Colors.Edo60
 
 
+{- | I like this better than @chainOfFifths_spacingMenu@.
+-}
+x :: Edo
+  -> Int -- ^ How many steps of the edo best approximate 3:2.
+  -> Int -- ^ number of chains to try to fit
+  -> Int -- ^ how much space to put between chains
+  -> Int -- ^ How many distinct notes result. If it's small, the chains are clobbering each other.
+x edo fifth nChains shiftSize =
+  length $ S.toList $ S.fromList $ concat
+  [ [ mod (s * shiftSize + positionInChain * fifth) edo
+    | positionInChain <- [0..6] ]
+  | s <- [0..nChains-1] ]
+
 {- | How much space (in the edo) to put
 between equally-spaced chains of fifths
 to maximize the number that fit on the Lumatone without overlapping.
+
+TODO : Replace this with the poorly-documented @x@ above.
 -}
 chainOfFifths_spacingMenu
   :: Edo
