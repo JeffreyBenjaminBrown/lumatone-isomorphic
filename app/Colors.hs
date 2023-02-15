@@ -1,6 +1,7 @@
 module Colors where
 
 import           Data.List.Extra (maximumOn)
+import           Data.List (sortOn)
 import           Data.Map (Map)
 import qualified Data.Map   as M
 import           Data.Set (Set)
@@ -27,6 +28,7 @@ if their default colors are confusing.
 import Colors.Edo34
 import Colors.Edo46
 import Colors.Edo58
+import Colors.Edo60
 
 
 {- | How much space (in the edo) to put
@@ -36,15 +38,15 @@ to maximize the number that fit on the Lumatone without overlapping.
 chainOfFifths_spacingMenu
   :: Edo
   -> Int -- ^ How big a fifth is. TODO: Automate.
-  -> Int {- ^ Number of chains.
-              Choice of this is more art than science currently. -}
-  -> [(Int,Int)]
-chainOfFifths_spacingMenu edo fifth nChains =
+  -> [(Int, -- ^ How much space is between each chain of fifths.
+       Int)] -- ^ How many notes the hcains will cover.
+chainOfFifths_spacingMenu edo fifth =
   let x z = S.toList $ S.fromList $
             concat [ [ mod (i*fifth + j*z) edo
                      | i <- [0..6] ]
                    | j <- [0..7] ]
-  in [ (z, length $ x z)
+  in sortOn snd
+     [ (z, length $ x z)
      | z <- [1.. edo `div` 2] ]
 
 -- * Mapping notes to colors
@@ -81,7 +83,8 @@ color_maps = M.map M.fromList $ M.fromList $ [
   -- for why the lines below differ from the lines above.
   (34, Colors.Edo34.theMap),
   (46, Colors.Edo46.theMap),
-  (58, Colors.Edo58.theMap)
+  (58, Colors.Edo58.theMap),
+  (60, Colors.Edo60.theMap)
   ]
 
 colors_for_31_edo :: [(MidiNote, Color)]

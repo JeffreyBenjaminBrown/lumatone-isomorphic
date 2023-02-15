@@ -33,6 +33,7 @@ executable lumatone-isomorphic
       Colors.Edo34,
       Colors.Edo46,
       Colors.Edo58,
+      Colors.Edo60,
       Layout,
       Lib,
       Test,
