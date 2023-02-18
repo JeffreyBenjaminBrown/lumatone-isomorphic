@@ -9,25 +9,25 @@ import Types
 -- * Simple colors
 
 color_white, color_gray, color_black :: Color
-color_b, color_g, color_r, color_rb, color_rg :: Color
+color_b, color_g, color_r, color_gb, color_rb, color_rg :: Color
 color_white = "ffffff"
 color_gray  = "888888" -- A dimmer version of white.
 color_black = "000000" -- All LEDs off. Looks gray-brown.
-color_b   = "0000ff"
-color_g   = "00ff00"
 color_r   = "ff0000"
-color_rb  = "bb00bb" -- purple
+color_g   = "00ff00"
+color_b   = "0000ff"
 color_rg  = "bbbb00" -- yellow
---color_gb  = "00bbbb" -- PITFALL: Indistinct -- close to both blue and white.
+color_rb  = "bb00bb" -- purple
+color_gb  = "00bb77" -- TODO: Is this still indistinct? Earlier, as 00bbbb, it close to both blue and white.
 
 colors :: Map Int Color
 colors = M.fromList [
-  (0, color_b  ),
-  (1, color_b  ),
-  (2, color_g  ),
-  (3, color_r  ),
-  (4, color_rb ),
-  (5, color_rg )
+  (0, color_r  ),
+  (1, color_g  ),
+  (2, color_b  ),
+  (4, color_rg ),
+  (3, color_rb ),
+  (5, color_gb )
   ]
 
 -- | This, the default color,
