@@ -17,7 +17,7 @@ theMap = let
      $ zip separators (repeat color_white)
      : zipWith f (M.elems colors) chains
 
-separators = [17,21,24,27]
+separators = [21,24,27]
 
 chains =
   [ [0,34,10,44,20,54,30]
