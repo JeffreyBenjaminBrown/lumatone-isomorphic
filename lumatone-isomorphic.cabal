@@ -30,6 +30,7 @@ executable lumatone-isomorphic
     other-modules:
       Colors,
       Colors.Simple,
+      Colors.Edo31,
       Colors.Edo34,
       Colors.Edo46,
       Colors.Edo58,

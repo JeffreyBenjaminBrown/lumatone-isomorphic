@@ -1,6 +1,6 @@
 -- import Colors.Edo58 (theMap)
 
-module Colors.Edo58 -- (theMap)
+module Colors.Edo58 (theMap)
 where
 
 import           Data.Map (Map)
