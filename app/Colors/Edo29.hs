@@ -1,4 +1,4 @@
-module Colors.Edo31 (theMap)
+module Colors.Edo29 -- (theMap)
 where
 
 import           Data.Map (Map)
@@ -17,11 +17,10 @@ theMap = let
      : zipWith f (M.elems colors) chains
 
 -- S.difference (S.fromList [0..30]) (S.fromList $ concat chains)
-separators = [8,13]
+separators = [28,1,3]
 
 chains =
-  -- myPrint $ [ [ mod (i*18 + j*2) 31 | i <- [0..6]] | j <- [0..3]]
-  [ [0,18,5,23,10,28,15]
-  , [2,20,7,25,12,30,17]
-  , [4,22,9,27,14,1,19]
-  , [6,24,11,29,16,3,21] ]
+  -- myPrint $ [ [ mod (i*17 + j*2) 29 | i <- [0..6]] | j <- [0..2]]
+  [ [0,17,5,22,10,27,15]
+  , [2,19,7,24,12,0,17]
+  , [4,21,9,26,14,2,19] ]

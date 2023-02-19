@@ -25,6 +25,7 @@ the way it does for the Bosanquet layouts I've tested.
 This is probably the way to go with other edos, too,
 if their default colors are confusing.
 -}
+import Colors.Edo29
 import Colors.Edo31
 import Colors.Edo34
 import Colors.Edo46
@@ -96,6 +97,7 @@ color_maps = M.map M.fromList $ M.fromList $ [
 
   -- See the comment on the corresponding import statements
   -- for why the lines below differ from the lines above.
+  (29, Colors.Edo29.theMap),
   (31, Colors.Edo31.theMap),
   (34, Colors.Edo34.theMap),
   (46, Colors.Edo46.theMap),

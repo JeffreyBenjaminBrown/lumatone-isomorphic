@@ -125,6 +125,7 @@ so that it can be sensibly line-sorted in Emacs.)
 -- go edo right_step downright_step note_shift channel_shift
 go 12 4   05  60 00
 go 24 5   04  00 00
+go 29 5   02  00 00
 go 31 5   03  00 00
 go 41 6 (-1)  00 00
 go 41 6 (-1)  22 00
