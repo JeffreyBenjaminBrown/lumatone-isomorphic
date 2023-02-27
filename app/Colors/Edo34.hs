@@ -13,16 +13,23 @@ import Types
 theMap :: [(MidiNote, Color)]
 theMap = octaveSeparators ++ chainsOfFifths where
 
-  octaveSeparators = [
+  octaveSeparators =
     {- The chains of fifth leave six notes uncolored:
     [4,9,14,19,24,29].
-    This group colors half of them white,
-    to serve as octave separators.
-    The choice is a little arbitrary,
-    but works out well for `go 34 7 3 0 0` -}
-    (14, color_white),
-    (19, color_white),
-    (24, color_white) ]
+    The possible definitions below color half of them white,
+    to serve as octave separators. -}
+
+    {- This choice works out well for `go 34 7 3`.
+    [ (14, color_white),
+      (19, color_white),
+      (24, color_white) ] -}
+
+    -- This choice works out well for `go 34 4 3`.
+    [ ( 9, color_white),
+      (19, color_white),
+      (29, color_white) ]
+
+
 
   chainsOfFifths = [
     ( 0, color_r),
