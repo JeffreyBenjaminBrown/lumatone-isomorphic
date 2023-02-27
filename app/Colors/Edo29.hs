@@ -1,4 +1,4 @@
-module Colors.Edo29 -- (theMap)
+module Colors.Edo29 (theMap)
 where
 
 import           Data.Map (Map)
