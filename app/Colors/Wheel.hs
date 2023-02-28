@@ -29,3 +29,12 @@ wheelColor f = let
             | f <- [ channelRed,
                      channelBlue,
                      channelGreen ] ]
+
+wheelOfFifths :: Edo
+  -> Int -- ^ how many microtones are in a 3:2 interval
+  -> Int -- ^ length of the chain of fifths
+  -> [(Int, ColorString)]
+wheelOfFifths edo fifth len =
+  [ (fifth * i `mod` edo, c)
+  | i <- [0..len-1],
+    let c = wheelColor $ fromIntegral i / fromIntegral len ]

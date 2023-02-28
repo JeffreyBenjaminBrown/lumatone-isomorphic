@@ -19,7 +19,15 @@ allTests = runTestTT $ TestList
   , test_colorUnitFloat_toHex
   , test_pad0
   , test_wheelColor
+  , test_wheelOfFifths
   ]
+
+test_wheelOfFifths :: Test
+test_wheelOfFifths = TestCase $ do
+  assertBool "" $ wheelOfFifths 12 7 3
+    == [ (0,"ff0000")
+       , (7,"0000ff")
+       , (2,"00ff00") ]
 
 test_wheelColor :: Test
 test_wheelColor = TestCase $ do
