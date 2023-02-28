@@ -18,7 +18,15 @@ allTests = runTestTT $ TestList
   , test_edoNote_to_keyData
   , test_colorUnitFloat_toHex
   , test_pad0
+  , test_wheelColor
   ]
+
+test_wheelColor :: Test
+test_wheelColor = TestCase $ do
+  assertBool "" $ wheelColor (2/3) == "00ff00"
+  assertBool "" $ wheelColor (1/3) == "0000ff"
+  assertBool "" $ wheelColor 0     == "ff0000"
+  assertBool "" $ wheelColor 0 == wheelColor 1
 
 test_colorUnitFloat_toHex :: Test
 test_colorUnitFloat_toHex = TestCase $ do

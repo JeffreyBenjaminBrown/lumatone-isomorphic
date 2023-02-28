@@ -7,3 +7,4 @@ import Data.Char
 
 
 import Colors.Research
+import Colors.Wheel
