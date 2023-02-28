@@ -29,13 +29,14 @@ executable lumatone-isomorphic
     -- Modules included in this executable, other than Main.
     other-modules:
       Colors,
-      Colors.Simple,
       Colors.Edo29,
       Colors.Edo31,
       Colors.Edo34,
       Colors.Edo46,
       Colors.Edo58,
       Colors.Edo60,
+      Colors.Simple,
+      Colors.Wheel,
       Layout,
       Lib,
       Test,
