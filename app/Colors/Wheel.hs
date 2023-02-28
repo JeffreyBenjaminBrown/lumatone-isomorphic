@@ -12,12 +12,14 @@ import Util
 import Types
 
 
--- | ASSUMES input is in [0,1].
--- Output is in ["00","ff"]
-colorUnitFloat_toHex :: Float -> String
-colorUnitFloat_toHex f =
-  let n = round $ 255 * f
-  in pad0 2 $ showIntAtBase 16 intToDigit n ""
+wheelOfFifths :: Edo
+  -> Int -- ^ how many microtones are in a 3:2 interval
+  -> Int -- ^ length of the chain of fifths
+  -> [(Int, ColorString)]
+wheelOfFifths edo fifth len =
+  [ (fifth * i `mod` edo, c)
+  | i <- [0..len-1],
+    let c = wheelColor $ fromIntegral i / fromIntegral len ]
 
 -- | ASSUMES input is in the open interval [0,1).
 -- (1 should give the same output as 0.)
@@ -30,11 +32,9 @@ wheelColor f = let
                      channelBlue,
                      channelGreen ] ]
 
-wheelOfFifths :: Edo
-  -> Int -- ^ how many microtones are in a 3:2 interval
-  -> Int -- ^ length of the chain of fifths
-  -> [(Int, ColorString)]
-wheelOfFifths edo fifth len =
-  [ (fifth * i `mod` edo, c)
-  | i <- [0..len-1],
-    let c = wheelColor $ fromIntegral i / fromIntegral len ]
+-- | ASSUMES input is in [0,1].
+-- Output is in ["00","ff"]
+colorUnitFloat_toHex :: Float -> String
+colorUnitFloat_toHex f =
+  let n = round $ 255 * f
+  in pad0 2 $ showIntAtBase 16 intToDigit n ""
