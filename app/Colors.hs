@@ -1,3 +1,5 @@
+{-# LANGUAGE ScopedTypeVariables #-}
+
 module Colors where
 
 import           Data.List.Extra (maximumOn)
@@ -33,16 +35,24 @@ import Colors.Edo58
 import Colors.Edo60
 
 
-lowerWhiteNote :: Map (Board, Key) EdoNote -> EdoNote
-lowerWhiteNote m = let
+-- | Identifies the note corresponding to a key near the top
+-- of the middle board, and about half a board to the left of
+-- the note identified by @middlish_high_key_note@.
+middlish_low_key_note :: Map (Board, Key) EdoNote -> EdoNote
+middlish_low_key_note m = let
   (b,k) = (2,22) {- Key 22 is in the middle of the top.  Board 2 is right in the middle. Using the middle board means that even if the layout is skew, it'll be near the middle of the top on all five boards. -}
-  errMsg = "lowerWhiteNote: (board,key) " ++ show (b,k) ++ "not found."
+  errMsg = "middlish_low_key_note: (board,key) "
+           ++ show (b,k) ++ "not found."
   in maybe (error errMsg) id $ M.lookup (b,k) m
 
-upperWhiteNote :: Map (Board, Key) EdoNote -> EdoNote
-upperWhiteNote m = let
+-- | Identifies the note corresponding to a key near the bottom
+-- of the middle board, and about half a board to the right of
+-- the note identified by @middlish_low_key_note@.
+middlish_high_key_note :: Map (Board, Key) EdoNote -> EdoNote
+middlish_high_key_note m = let
   (b,k) = (2,22) {- Key 22 is in the middle of the bottom.  Board 2 is right in the middle. Using the middle board means that even if the layout is skew, it'll be near the middle of the bottom on all five boards. -}
-  errMsg = "upperWhiteNote: (board,key) " ++ show (b,k) ++ "not found."
+  errMsg = "middlish_high_key_note: (board,key) "
+           ++ show (b,k) ++ "not found."
   in maybe (error errMsg) id $ M.lookup (b,k) m
 
 
