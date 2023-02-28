@@ -8,8 +8,8 @@ import Types
 
 -- * Simple colors
 
-color_white, color_gray, color_black :: Color
-color_b, color_g, color_r, color_gb, color_rb, color_rg :: Color
+color_white, color_gray, color_black :: ColorString
+color_b, color_g, color_r, color_gb, color_rb, color_rg :: ColorString
 color_white = "ffffff"
 color_gray  = "888888" -- A dimmer version of white.
 color_black = "000000" -- All LEDs off. Looks gray-brown.
@@ -20,7 +20,7 @@ color_rg  = "bbbb00" -- yellow
 color_rb  = "bb00bb" -- purple
 color_gb  = "00bb77" -- TODO: Is this still indistinct? Earlier, as 00bbbb, it close to both blue and white.
 
-colors :: Map Int Color
+colors :: Map Int ColorString
 colors = M.fromList [
   (0, color_r  ),
   (1, color_g  ),

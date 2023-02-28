@@ -10,7 +10,7 @@ import Types
 
 
 -- | Four non-overlapping chains of 7 notes separated by 3:2.
-theMap :: [(MidiNote, Color)]
+theMap :: [(MidiNote, ColorString)]
 theMap = octaveSeparators ++ chainsOfFifths where
 
   octaveSeparators =

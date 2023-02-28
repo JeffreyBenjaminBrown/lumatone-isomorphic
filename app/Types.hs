@@ -10,7 +10,7 @@ type Key = Int -- ^ Each Board has 56 keys, numbered 0 to 55.
 data KeyData = KeyData {
   keyChannel :: MidiChannel,
   keyNote :: MidiNote,
-  keyColor :: Color }
+  keyColorString :: ColorString }
   deriving (Show, Eq, Ord)
 
 -- | These are computer graphics-style coordinates:
@@ -24,5 +24,5 @@ type MidiNote    = Int -- ^ A value in [0,127].
 type MidiChannel = Int -- ^ A value in [0,15], I guess.
                        -- TODO : Right?
 
-type Color = String
+type ColorString = String
 type Filename = String

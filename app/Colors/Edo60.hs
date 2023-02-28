@@ -7,9 +7,9 @@ import Colors.Simple
 import Types
 
 
-theMap :: [(MidiNote, Color)]
+theMap :: [(MidiNote, ColorString)]
 theMap = let
-  f :: Color -> [MidiNote] -> [(MidiNote,Color)]
+  f :: ColorString -> [MidiNote] -> [(MidiNote,ColorString)]
   f c = map $ \n -> (n,c)
   in (concat $ zipWith f (M.elems colors) theChainsOfFifths)
      ++ zip [5,7..19] (repeat color_white)

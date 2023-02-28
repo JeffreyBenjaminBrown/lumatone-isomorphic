@@ -71,7 +71,7 @@ edoNote_to_keyData e en = let
   midiNote =                mod en e
   in KeyData { keyChannel = div en e,
                keyNote    = midiNote,
-               keyColor   = color e midiNote }
+               keyColorString   = color e midiNote }
 
 shift_channels ::
   MidiChannel
@@ -98,9 +98,9 @@ lumatone edo right_step downright_step note_shift channel_shift = let
 -- keyStrings k kd
 keyStrings :: Key -> KeyData -> [String]
 keyStrings k kd =
-  [ "Key_"  ++ show k ++ "=" ++ show (keyNote    kd),
-    "Chan_" ++ show k ++ "=" ++ show (keyChannel kd),
-    "Col_"  ++ show k ++ "=" ++ show (keyColor   kd) ]
+  [ "Key_"  ++ show k ++ "=" ++ show (keyNote        kd),
+    "Chan_" ++ show k ++ "=" ++ show (keyChannel     kd),
+    "Col_"  ++ show k ++ "=" ++ show (keyColorString kd) ]
 
 boardStrings :: Board -> Map (Board,Key) KeyData -> [String]
 boardStrings b m = let

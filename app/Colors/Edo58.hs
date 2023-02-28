@@ -10,9 +10,9 @@ import Colors.Simple
 import Types
 
 
-theMap :: [(MidiNote, Color)]
+theMap :: [(MidiNote, ColorString)]
 theMap = let
-  f :: Color -> [MidiNote] -> [(MidiNote,Color)]
+  f :: ColorString -> [MidiNote] -> [(MidiNote,ColorString)]
   f c = map $ \n -> (n,c)
   in concat
      $ zip separators (repeat color_white)
