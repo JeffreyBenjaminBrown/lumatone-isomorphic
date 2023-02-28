@@ -4,8 +4,10 @@ import           Data.Map (Map)
 import qualified Data.Map   as M
 import           Test.HUnit
 
+import Colors.Wheel
 import Lib
 import Types
+import Util
 
 
 allTests :: IO Counts
@@ -14,7 +16,18 @@ allTests = runTestTT $ TestList
   , test_xy_to_edoNote
   , test_board_edoNotes
   , test_edoNote_to_keyData
+  , test_colorUnitFloat_toHex
+  , test_pad0
   ]
+
+test_colorUnitFloat_toHex :: Test
+test_colorUnitFloat_toHex = TestCase $ do
+  assertBool "0 -> 00" $ colorUnitFloat_toHex 0 == "00"
+  assertBool "1 -> ff" $ colorUnitFloat_toHex 1 == "ff"
+
+test_pad0 :: Test
+test_pad0 = TestCase $ do
+  assertBool "" $ pad0 3 "1x" == "01x"
 
 test_board_key_to_xy :: Test
 test_board_key_to_xy = TestCase $ do

@@ -2,9 +2,8 @@ import qualified Data.List        as L
 import qualified Data.List.Extra  as LE
 import Data.Colour.SRGB
 
-
-ghci> import Numeric
-ghci> import Data.Char
+import Numeric
+import Data.Char
 
 
 import Colors.Research
