@@ -8,11 +8,11 @@ import Colors.Simple
 import Types
 
 
-theMap :: [(MidiNote, ColorString)]
+theMap :: Map MidiNote ColorString
 theMap = let
   f :: ColorString -> [MidiNote] -> [(MidiNote,ColorString)]
   f c = map $ \n -> (n,c)
-  in concat
+  in M.fromList $ concat
      $ zip separators (repeat color_white)
      : zipWith f (M.elems colors) chains
 

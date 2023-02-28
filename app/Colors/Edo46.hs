@@ -13,8 +13,8 @@ import Types
 -- Going down by one vertical key in that layout
 -- corresponds to going up in pitch 7\46 steps,
 -- so this layout stacks 5 chains of fifths vertically.
-theMap :: [(MidiNote, ColorString)]
-theMap = [
+theMap :: Map MidiNote ColorString
+theMap = M.fromList [
   (0  , color_rb ),
   (27 , color_rb ),
   (8  , color_rb ),

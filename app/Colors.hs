@@ -58,7 +58,7 @@ upperWhiteNote m = let
 color :: Edo -> MidiNote -> ColorString
 color edo note =
   let color_map :: Map MidiNote ColorString
-      color_map = maybe (M.fromList colors_for_50_edo) id $
+      color_map = maybe colors_for_50_edo id $
                   M.lookup edo color_maps
   in maybe default_color id $
      M.lookup note color_map
@@ -70,7 +70,7 @@ color edo note =
 -- These colors work out nicely for Bosanquet 41-edo.
 -- For some other edo and/or layout, they might not.
 color_maps :: Map Edo (Map MidiNote ColorString)
-color_maps = M.map M.fromList $ M.fromList $ [
+color_maps = M.fromList $ [
   (41, colors_for_41_edo),
   (50, colors_for_50_edo),
   (53, colors_for_53_edo),
@@ -85,19 +85,19 @@ color_maps = M.map M.fromList $ M.fromList $ [
   (60, Colors.Edo60.theMap)
   ]
 
-colors_for_31_edo :: [(MidiNote, ColorString)]
+colors_for_31_edo :: Map MidiNote ColorString
 colors_for_31_edo = chains_to_note_colors $
                     chains_of_fifths 31 18 2 4
 
-colors_for_41_edo :: [(MidiNote, ColorString)]
+colors_for_41_edo :: Map MidiNote ColorString
 colors_for_41_edo = chains_to_note_colors $
                     chains_of_fifths 41 24 4 5
 
-colors_for_50_edo :: [(MidiNote, ColorString)]
+colors_for_50_edo :: Map MidiNote ColorString
 colors_for_50_edo = chains_to_note_colors $
                     chains_of_fifths 50 29 3 7
 
-colors_for_53_edo :: [(MidiNote, ColorString)]
+colors_for_53_edo :: Map MidiNote ColorString
 colors_for_53_edo = chains_to_note_colors $
                     chains_of_fifths 53 31 5 7
 
@@ -150,8 +150,8 @@ chains_do_not_overlap chains =
   in length (S.toList $ S.fromList notes)
      == length notes
 
-chains_to_note_colors :: NoteChains -> [(MidiNote, ColorString)]
-chains_to_note_colors = map f where
+chains_to_note_colors :: NoteChains -> Map MidiNote ColorString
+chains_to_note_colors = M.fromList . map f where
   f :: (EdoNote, (Int,Int)) -> (MidiNote, ColorString)
   f (note, (group, position)) =
     (note, if position == 0
