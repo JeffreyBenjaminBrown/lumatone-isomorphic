@@ -43,7 +43,7 @@ xy_to_edoNote right_step downright_step note_shift (x,y) =
 board_edoNotes ::
   EdoNote    -- ^ How much pitch changes as one steps right on the keyboard.
   -> EdoNote -- ^ How much pitch changes as one steps down-right.
-  -> EdoNote -- ^ A nonnegative shift amount for all pitches pitches.
+  -> EdoNote -- ^ A nonnegative shift amount for all pitches.
   -> Map (Board, Key) EdoNote
 board_edoNotes right_step downright_step note_shift =
   let f :: (Board, Key) -> EdoNote
@@ -68,10 +68,10 @@ nonnegative_keyData l = let
 
 edoNote_to_keyData :: Edo -> EdoNote -> KeyData
 edoNote_to_keyData e en = let
-  midiNote =                mod en e
-  in KeyData { keyChannel = div en e,
-               keyNote    = midiNote,
-               keyColorString   = color e midiNote }
+  midiNote = mod en e
+  in KeyData { keyChannel     = div en e,
+               keyNote        = midiNote,
+               keyColorString = color e midiNote }
 
 shift_channels ::
   MidiChannel
