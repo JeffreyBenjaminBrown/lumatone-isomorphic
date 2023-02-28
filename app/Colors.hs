@@ -55,6 +55,25 @@ middlish_high_key_note m = let
            ++ show (b,k) ++ "not found."
   in maybe (error errMsg) id $ M.lookup (b,k) m
 
+{- | Modifies a @Map MidiNote ColorString@ by adding black and white notes.
+The two black notes will, at least if octaves are close to Bosanquet,
+be around the middle of the bottom-right of each board,
+and the white notes the middle of the top-left.
+-}
+overlay_blackAndWhite ::
+  EdoNote
+  -> Map (Board, Key) EdoNote
+  -> Map MidiNote ColorString
+  -> Map MidiNote ColorString
+overlay_blackAndWhite up boards = let
+  low  :: EdoNote = middlish_low_key_note boards
+  high :: EdoNote = middlish_high_key_note boards
+  overlay = M.fromList [ (low, color_black),
+                         (low + up, color_black),
+                         (high, color_black),
+                         (high + up, color_white) ]
+  in M.union overlay
+
 
 -- * Mapping notes to colors
 
