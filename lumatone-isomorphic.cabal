@@ -45,9 +45,10 @@ executable lumatone-isomorphic
     -- LANGUAGE extensions used by modules in this package.
     -- other-extensions:
     build-depends:
+      HUnit,
       base,
+      colour,
       containers,
-      extra,
-      HUnit
+      extra
     hs-source-dirs:   app
     default-language: Haskell2010

@@ -1,0 +1,9 @@
+import qualified Data.Colour.RGBSpace.HSL as H
+
+
+Algorithm: First calculate a fully color-saturated chain of fifths with hue value spaced equally in [0,360), such that one more step would go to 360. Then color a vertical few at the octave white, and a vertical few at the half-octave black. This might work for every edo.
+```
+H.hsl 0 1 0.5   -- (1,0,0)
+H.hsl 120 1 0.5 -- (0,1,0)
+H.hsl 240 1 0.5 -- (0,0,1)
+```
