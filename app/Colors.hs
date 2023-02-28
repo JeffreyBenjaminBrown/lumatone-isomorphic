@@ -33,6 +33,19 @@ import Colors.Edo58
 import Colors.Edo60
 
 
+lowerWhiteNote :: Map (Board, Key) EdoNote -> EdoNote
+lowerWhiteNote m = let
+  (b,k) = (2,22) {- Key 22 is in the middle of the top.  Board 2 is right in the middle. Using the middle board means that even if the layout is skew, it'll be near the middle of the top on all five boards. -}
+  errMsg = "lowerWhiteNote: (board,key) " ++ show (b,k) ++ "not found."
+  in maybe (error errMsg) id $ M.lookup (b,k) m
+
+upperWhiteNote :: Map (Board, Key) EdoNote -> EdoNote
+upperWhiteNote m = let
+  (b,k) = (2,22) {- Key 22 is in the middle of the bottom.  Board 2 is right in the middle. Using the middle board means that even if the layout is skew, it'll be near the middle of the bottom on all five boards. -}
+  errMsg = "upperWhiteNote: (board,key) " ++ show (b,k) ++ "not found."
+  in maybe (error errMsg) id $ M.lookup (b,k) m
+
+
 -- * Mapping notes to colors
 
 -- | The Edo determines the color map used.
