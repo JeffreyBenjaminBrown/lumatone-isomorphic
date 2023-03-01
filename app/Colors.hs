@@ -80,9 +80,9 @@ overlay_lowWhite ::
   -> Map MidiNote ColorString
 overlay_lowWhite edo up_step boards = let
   low  :: EdoNote = middlish_low_key_note boards
-  overlay = M.fromList [ (low                 `mod` 31, color_white),
-                         ((low +     up_step) `mod` 31, color_white),
-                         ((low + 2 * up_step) `mod` 31, color_white) ]
+  overlay = M.fromList [ (low                 `mod` edo, color_white),
+                         ((low +     up_step) `mod` edo, color_white),
+                         ((low + 2 * up_step) `mod` edo, color_white) ]
   in M.union overlay
 
 overlay_highBlack ::
@@ -93,9 +93,9 @@ overlay_highBlack ::
   -> Map MidiNote ColorString
 overlay_highBlack edo up_step boards = let
   high :: EdoNote = middlish_high_key_note boards
-  overlay = M.fromList [ (high                 `mod` 31, color_black),
-                         ((high +     up_step) `mod` 31, color_black),
-                         ((high + 2 * up_step) `mod` 31, color_black) ]
+  overlay = M.fromList [ (high                 `mod` edo, color_black),
+                         ((high +     up_step) `mod` edo, color_black),
+                         ((high + 2 * up_step) `mod` edo, color_black) ]
   in M.union overlay
 
 
