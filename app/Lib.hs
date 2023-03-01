@@ -40,6 +40,8 @@ xy_to_edoNote ::
 xy_to_edoNote right_step downright_step note_shift (x,y) =
   right_step * x + downright_step * y + note_shift
 
+{- | PITFALL: This is unaware of the Edo,
+and usually (always?) returns values above it. -}
 board_edoNotes ::
   EdoNote    -- ^ How much pitch changes as one steps right on the keyboard.
   -> EdoNote -- ^ How much pitch changes as one steps down-right.
@@ -66,12 +68,14 @@ nonnegative_keyData l = let
     keyChannel = keyChannel kd - min_midiChannel + 1 }
   in M.map subtract_those l
 
-edoNote_to_keyData :: Edo -> EdoNote -> KeyData
-edoNote_to_keyData e en = let
+edoNote_to_keyData ::
+  (Map MidiNote ColorString -> Map MidiNote ColorString)
+  -> Edo -> EdoNote -> KeyData
+edoNote_to_keyData overlay e en = let
   midiNote = mod en e
   in KeyData { keyChannel     = div en e,
                keyNote        = midiNote,
-               keyColorString = color e midiNote }
+               keyColorString = color overlay e midiNote }
 
 shift_channels ::
   MidiChannel
@@ -87,9 +91,12 @@ lumatone :: Edo -> EdoNote -> EdoNote -> EdoNote -> MidiChannel
 lumatone edo right_step downright_step note_shift channel_shift = let
   m_bk_e :: Map (Board,Key) EdoNote
   m_bk_e = board_edoNotes right_step downright_step note_shift
+  up_step = right_step - downright_step
+  overlay :: Map MidiNote ColorString -> Map MidiNote ColorString
+  overlay = overlay_lowWhite edo up_step m_bk_e
   in shift_channels channel_shift
      $ nonnegative_keyData
-     $ M.map (edoNote_to_keyData edo) m_bk_e
+     $ M.map (edoNote_to_keyData overlay edo) m_bk_e
 
 -- TODO ? Check, then formalize this test.
 -- l = lumatone 41 7 3

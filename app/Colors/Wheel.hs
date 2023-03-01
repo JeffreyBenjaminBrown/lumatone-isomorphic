@@ -6,6 +6,8 @@ import           Data.Char
 import           Data.Colour.SRGB
 import           Data.Colour.RGBSpace.HSL (hsl)
 import qualified Data.List as L
+import           Data.Map (Map)
+import qualified Data.Map   as M
 import           Numeric
 
 import Util
@@ -15,8 +17,9 @@ import Types
 wheelOfFifths :: Edo
   -> Int -- ^ how many microtones are in a 3:2 interval
   -> Int -- ^ length of the chain of fifths
-  -> [(MidiNote, ColorString)]
+  -> Map MidiNote ColorString
 wheelOfFifths edo fifth len =
+  M.fromList $
   [ (fifth * i `mod` edo, c)
   | i <- [0..len-1],
     let c = wheelColor $ fromIntegral i / fromIntegral len ]

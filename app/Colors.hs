@@ -10,6 +10,7 @@ import           Data.Set (Set)
 import qualified Data.Set   as S
 
 import Colors.Simple
+import Colors.Wheel
 import Types
 
 {- | PITFALL:
@@ -38,9 +39,9 @@ import Colors.Edo60
 -- | Identifies the note corresponding to a key near the top
 -- of the middle board, and about half a board to the left of
 -- the note identified by @middlish_high_key_note@.
-middlish_low_key_note :: Map (Board, Key) EdoNote -> EdoNote
-middlish_low_key_note m = let
-  (b,k) = (2,22) {- Key 22 is in the middle of the top.  Board 2 is right in the middle. Using the middle board means that even if the layout is skew, it'll be near the middle of the top on all five boards. -}
+middlish_high_key_note :: Map (Board, Key) EdoNote -> EdoNote
+middlish_high_key_note m = let
+  (b,k) = (2,21) {- Key 21 is in the middle of the top.  Board 2 is right in the middle. Using the middle board means that even if the layout is skew, it'll be near the middle of the top on all five boards. -}
   errMsg = "middlish_low_key_note: (board,key) "
            ++ show (b,k) ++ "not found."
   in maybe (error errMsg) id $ M.lookup (b,k) m
@@ -48,9 +49,9 @@ middlish_low_key_note m = let
 -- | Identifies the note corresponding to a key near the bottom
 -- of the middle board, and about half a board to the right of
 -- the note identified by @middlish_low_key_note@.
-middlish_high_key_note :: Map (Board, Key) EdoNote -> EdoNote
-middlish_high_key_note m = let
-  (b,k) = (2,22) {- Key 22 is in the middle of the bottom.  Board 2 is right in the middle. Using the middle board means that even if the layout is skew, it'll be near the middle of the bottom on all five boards. -}
+middlish_low_key_note :: Map (Board, Key) EdoNote -> EdoNote
+middlish_low_key_note m = let
+  (b,k) = (2,46) {- Key 46 is in the middle of the bottom.  Board 2 is right in the middle. Using the middle board means that even if the layout is skew, it'll be near the middle of the bottom on all five boards. -}
   errMsg = "middlish_high_key_note: (board,key) "
            ++ show (b,k) ++ "not found."
   in maybe (error errMsg) id $ M.lookup (b,k) m
@@ -62,17 +63,39 @@ be around the middle of the bottom-right of each board,
 and the white notes the middle of the top-left.
 -}
 overlay_blackAndWhite ::
-  EdoNote
+  Edo
+  -> EdoNote
   -> Map (Board, Key) EdoNote
   -> Map MidiNote ColorString
   -> Map MidiNote ColorString
-overlay_blackAndWhite up_step boards = let
+overlay_blackAndWhite edo up_step boards =
+  overlay_lowWhite  edo up_step boards .
+  overlay_highBlack edo up_step boards
+
+overlay_lowWhite ::
+  Edo
+  -> EdoNote
+  -> Map (Board, Key) EdoNote
+  -> Map MidiNote ColorString
+  -> Map MidiNote ColorString
+overlay_lowWhite edo up_step boards = let
   low  :: EdoNote = middlish_low_key_note boards
+  overlay = M.fromList [ (low                 `mod` 31, color_white),
+                         ((low +     up_step) `mod` 31, color_white),
+                         ((low + 2 * up_step) `mod` 31, color_white) ]
+  in M.union overlay
+
+overlay_highBlack ::
+  Edo
+  -> EdoNote
+  -> Map (Board, Key) EdoNote
+  -> Map MidiNote ColorString
+  -> Map MidiNote ColorString
+overlay_highBlack edo up_step boards = let
   high :: EdoNote = middlish_high_key_note boards
-  overlay = M.fromList [ (low, color_black),
-                         (low + up_step, color_black),
-                         (high, color_black),
-                         (high + up_step, color_white) ]
+  overlay = M.fromList [ (high                 `mod` 31, color_black),
+                         ((high +     up_step) `mod` 31, color_black),
+                         ((high + 2 * up_step) `mod` 31, color_black) ]
   in M.union overlay
 
 
@@ -85,13 +108,15 @@ overlay_blackAndWhite up_step boards = let
 -- since that's got the maximum possible number of note-color
 -- pairs (49, given that there are only 7 colors and 7 notes
 -- per color) and is empty almost nowhere.
-color :: Edo -> MidiNote -> ColorString
-color edo note =
+color ::
+  (Map MidiNote ColorString -> Map MidiNote ColorString)
+  -> Edo -> MidiNote -> ColorString
+color overlay edo note =
   let color_map :: Map MidiNote ColorString
       color_map = maybe colors_for_50_edo id $
                   M.lookup edo color_maps
   in maybe default_color id $
-     M.lookup note color_map
+     M.lookup note $ overlay color_map
 
 -- | This assigns colors to EDO values.
 -- Not every EDO value needs to have a color assigned,
@@ -105,11 +130,13 @@ color_maps = M.fromList $ [
   (50, colors_for_50_edo),
   (53, colors_for_53_edo),
 
+  -- experimental
+  (31, wheelOfFifths 31 18 31),
+  (34, wheelOfFifths 34 20 17),
+
   -- See the comment on the corresponding import statements
   -- for why the lines below differ from the lines above.
   (29, Colors.Edo29.theMap),
-  (31, Colors.Edo31.theMap),
-  (34, Colors.Edo34.theMap),
   (46, Colors.Edo46.theMap),
   (58, Colors.Edo58.theMap),
   (60, Colors.Edo60.theMap)

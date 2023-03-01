@@ -25,9 +25,9 @@ allTests = runTestTT $ TestList
 test_wheelOfFifths :: Test
 test_wheelOfFifths = TestCase $ do
   assertBool "" $ wheelOfFifths 12 7 3
-    == [ (0,"ff0000")
-       , (7,"0000ff")
-       , (2,"00ff00") ]
+    == M.fromList [ (0,"ff0000")
+                  , (7,"0000ff")
+                  , (2,"00ff00") ]
 
 test_wheelColor :: Test
 test_wheelColor = TestCase $ do
@@ -72,10 +72,10 @@ test_board_edoNotes = TestCase $ do
 
 test_edoNote_to_keyData :: Test
 test_edoNote_to_keyData = TestCase $ do
-  let kd = edoNote_to_keyData 31 12
+  let kd = edoNote_to_keyData id 31 12
   assertBool "channel"     $ keyChannel     kd == 0
   assertBool "note"        $ keyNote        kd == 12
 
-  let kd = edoNote_to_keyData 31 (31 + 12)
+  let kd = edoNote_to_keyData id 31 (31 + 12)
   assertBool "channel"     $ keyChannel     kd == 1
   assertBool "note"        $ keyNote        kd == 12
