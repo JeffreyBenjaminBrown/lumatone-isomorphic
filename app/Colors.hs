@@ -36,33 +36,14 @@ import Colors.Edo58
 import Colors.Edo60
 
 
-middle_board_key_to_edoNote :: Int -> Map (Board, Key) EdoNote -> EdoNote
+middle_board_key_to_edoNote :: Key -> Map (Board, Key) EdoNote -> EdoNote
 middle_board_key_to_edoNote key = let
   board = 2
-  errMsg = "middlish_low_key_note: (board,key) "
+  errMsg = "middle_board_key_to_edoNote: (board,key) "
            ++ show (board, key) ++ "not found."
   in maybe (error errMsg) id
      . M.lookup (board, key)
 
--- | Identifies the note corresponding to a key near the top
--- of the middle board, and about half a board to the left of
--- the note identified by @middlish_high_key_note@.
-middlish_high_key_note :: Map (Board, Key) EdoNote -> EdoNote
-middlish_high_key_note m = let
-  (b,k) = (2,21) {- Key 21 is in the middle of the top.  Board 2 is right in the middle. Using the middle board means that even if the layout is skew, it'll be near the middle of the top on all five boards. -}
-  errMsg = "middlish_low_key_note: (board,key) "
-           ++ show (b,k) ++ "not found."
-  in maybe (error errMsg) id $ M.lookup (b,k) m
-
--- | Identifies the note corresponding to a key near the bottom
--- of the middle board, and about half a board to the right of
--- the note identified by @middlish_low_key_note@.
-middlish_low_key_note :: Map (Board, Key) EdoNote -> EdoNote
-middlish_low_key_note m = let
-  (b,k) = (2,46) {- Key 46 is in the middle of the bottom.  Board 2 is right in the middle. Using the middle board means that even if the layout is skew, it'll be near the middle of the bottom on all five boards. -}
-  errMsg = "middlish_high_key_note: (board,key) "
-           ++ show (b,k) ++ "not found."
-  in maybe (error errMsg) id $ M.lookup (b,k) m
 
 {- | Modifies a @Map MidiNote ColorString@
 by adding two black and two white notes.
@@ -87,7 +68,7 @@ overlay_lowWhite ::
   -> Map MidiNote ColorString
   -> Map MidiNote ColorString
 overlay_lowWhite edo up_step boards = let
-  low  :: EdoNote = middlish_low_key_note boards
+  low  :: EdoNote = middle_board_key_to_edoNote 46 boards
   overlay = M.fromList [ (low                 `mod` edo, color_white),
                          ((low +     up_step) `mod` edo, color_white),
                          ((low + 2 * up_step) `mod` edo, color_white) ]
@@ -100,7 +81,7 @@ overlay_highBlack ::
   -> Map MidiNote ColorString
   -> Map MidiNote ColorString
 overlay_highBlack edo up_step boards = let
-  high :: EdoNote = middlish_high_key_note boards
+  high :: Int = middle_board_key_to_edoNote 21 boards
   overlay = M.fromList [ (high                 `mod` edo, color_black),
                          ((high +     up_step) `mod` edo, color_black),
                          ((high + 2 * up_step) `mod` edo, color_black) ]

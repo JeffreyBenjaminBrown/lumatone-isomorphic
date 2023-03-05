@@ -6,5 +6,7 @@ import Numeric
 import Data.Char
 
 
+import Lib
+import Types
 import Colors.Research
-import Colors.Wheel
+import Colors.Rainbow

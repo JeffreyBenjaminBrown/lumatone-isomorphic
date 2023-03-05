@@ -41,7 +41,7 @@ xy_to_edoNote right_step downright_step note_shift (x,y) =
   right_step * x + downright_step * y + note_shift
 
 {- | PITFALL: This is unaware of the Edo,
-and usually (always?) returns values above it. -}
+and usually (always?) returns values above it for some keys. -}
 board_edoNotes ::
   EdoNote    -- ^ How much pitch changes as one steps right on the keyboard.
   -> EdoNote -- ^ How much pitch changes as one steps down-right.
@@ -98,11 +98,12 @@ lumatone edo right_step downright_step note_shift channel_shift = let
      $ nonnegative_keyData
      $ M.map (edoNote_to_keyData overlay edo) m_bk_e
 
--- TODO ? Check, then formalize this test.
--- l = lumatone 41 7 3
--- (b,k) = (2,3)
--- kd = maybe (error "") id $ M.lookup (b,k) l
--- keyStrings k kd
+{- | TODO ? Check, then formalize this test.
+l = lumatone 41 7 3
+(b,k) = (2,3)
+kd = maybe (error "") id $ M.lookup (b,k) l
+keyStrings k kd
+-}
 keyStrings :: Key -> KeyData -> [String]
 keyStrings k kd =
   [ "Key_"  ++ show k ++ "=" ++ show (keyNote        kd),
