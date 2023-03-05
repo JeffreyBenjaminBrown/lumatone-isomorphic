@@ -44,6 +44,26 @@ middle_board_key_to_edoNote key = let
   in maybe (error errMsg) id
      . M.lookup (board, key)
 
+{- | TODO replace every instance of these:
+  @
+  overlay_blackAndWhite
+  overlay_lowWhite
+  overlay_highBlack
+  @
+with this.
+-}
+overlay_key_color ::
+  Edo
+  -> [Int] -- ^ keys on the middle board (board 2) to color
+  -> ColorString
+  -> Map (Board, Key) EdoNote
+  -> Map MidiNote ColorString
+  -> Map MidiNote ColorString
+overlay_key_color edo keys color lumatone =
+  M.union $ M.fromList
+  [ ( mod (middle_board_key_to_edoNote key lumatone) edo,
+      color )
+  | key <- keys ]
 
 {- | Modifies a @Map MidiNote ColorString@
 by adding two black and two white notes.
@@ -122,11 +142,11 @@ color_maps = M.fromList $ [
   -- experimental
   (31, rainbowOfFifths 31 18 31),
   (34, rainbowOfFifths 34 20 17),
+  (46, rainbowOfFifths 46 27 46),
 
   -- See the comment on the corresponding import statements
   -- for why the lines below differ from the lines above.
   (29, Colors.Edo29.theMap),
-  (46, Colors.Edo46.theMap),
   (58, Colors.Edo58.theMap),
   (60, Colors.Edo60.theMap)
   ]

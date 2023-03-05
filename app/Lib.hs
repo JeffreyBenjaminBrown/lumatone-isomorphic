@@ -9,6 +9,7 @@ import           Data.Map (Map)
 import           Data.Maybe as Mb
 
 import Colors
+import Colors.Simple
 import Layout
 import Types
 
@@ -87,13 +88,16 @@ shift_channels channel_shift =
   in M.map f
 
 lumatone :: Edo -> EdoNote -> EdoNote -> EdoNote -> MidiChannel
+         -> [Key] -> [Key]
          -> Map (Board, Key) KeyData
-lumatone edo right_step downright_step note_shift channel_shift = let
+lumatone edo right_step downright_step note_shift channel_shift
+         black_keys white_keys = let
   m_bk_e :: Map (Board,Key) EdoNote
   m_bk_e = board_edoNotes right_step downright_step note_shift
   up_step = right_step - downright_step
   overlay :: Map MidiNote ColorString -> Map MidiNote ColorString
-  overlay = overlay_lowWhite edo up_step m_bk_e
+  overlay = overlay_key_color edo black_keys color_black m_bk_e .
+            overlay_key_color edo white_keys color_white m_bk_e
   in shift_channels channel_shift
      $ nonnegative_keyData
      $ M.map (edoNote_to_keyData overlay edo) m_bk_e
@@ -110,6 +114,9 @@ keyStrings k kd =
     "Chan_" ++ show k ++ "=" ++ show (keyChannel     kd),
     "Col_"  ++ show k ++ "=" ++ show (keyColorString kd) ]
 
+{- | Returns, I think, a list of 1 + 3*55 keys --
+the first being a line to introduce the Board,
+and every group of three thereafter corresponding to a key. -}
 boardStrings :: Board -> Map (Board,Key) KeyData -> [String]
 boardStrings b m = let
   first :: String = "[Board" ++ show b ++ "]"
@@ -139,11 +146,14 @@ go :: Edo
    -> EdoNote     -- ^ down-right step
    -> EdoNote     -- ^ midi note shift
    -> MidiChannel -- ^ midi channel shift
+   -> [Key] -> [Key]
    -> IO (Map (Board, Key) KeyData)
-go edo right_step downright_step note_shift channel_shift = do
+go edo right_step downright_step note_shift channel_shift
+   black_keys white_keys = do
   let
     l :: Map (Board, Key) KeyData =
       lumatone edo right_step downright_step note_shift channel_shift
+               black_keys white_keys
     s :: [String] =
       concat [ boardStrings b l
              | b <- [0..4] ]
