@@ -29,8 +29,6 @@ theMap = M.fromList $ octaveSeparators ++ chainsOfFifths where
       (19, color_white),
       (29, color_white) ]
 
-
-
   chainsOfFifths = [
     ( 0, color_r),
     (20, color_r),

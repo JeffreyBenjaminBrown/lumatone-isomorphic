@@ -4,7 +4,7 @@ import           Data.Map (Map)
 import qualified Data.Map   as M
 import           Test.HUnit
 
-import Colors.Wheel
+import Colors.Rainbow
 import Lib
 import Types
 import Util
@@ -18,23 +18,23 @@ allTests = runTestTT $ TestList
   , test_edoNote_to_keyData
   , test_colorUnitFloat_toHex
   , test_pad0
-  , test_wheelColor
-  , test_wheelOfFifths
+  , test_rainbowColor
+  , test_rainbowOfFifths
   ]
 
-test_wheelOfFifths :: Test
-test_wheelOfFifths = TestCase $ do
-  assertBool "" $ wheelOfFifths 12 7 3
+test_rainbowOfFifths :: Test
+test_rainbowOfFifths = TestCase $ do
+  assertBool "" $ rainbowOfFifths 12 7 3
     == M.fromList [ (0,"ff0000")
                   , (7,"0000ff")
                   , (2,"00ff00") ]
 
-test_wheelColor :: Test
-test_wheelColor = TestCase $ do
-  assertBool "" $ wheelColor (2/3) == "00ff00"
-  assertBool "" $ wheelColor (1/3) == "0000ff"
-  assertBool "" $ wheelColor 0     == "ff0000"
-  assertBool "" $ wheelColor 0 == wheelColor 1
+test_rainbowColor :: Test
+test_rainbowColor = TestCase $ do
+  assertBool "" $ rainbowColor (2/3) == "00ff00"
+  assertBool "" $ rainbowColor (1/3) == "0000ff"
+  assertBool "" $ rainbowColor 0     == "ff0000"
+  assertBool "" $ rainbowColor 0 == rainbowColor 1
 
 test_colorUnitFloat_toHex :: Test
 test_colorUnitFloat_toHex = TestCase $ do

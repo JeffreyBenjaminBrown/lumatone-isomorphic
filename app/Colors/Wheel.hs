@@ -1,6 +1,6 @@
 {-# LANGUAGE ScopedTypeVariables #-}
 
-module Colors.Wheel where
+module Colors.Rainbow where
 
 import           Data.Char
 import           Data.Colour.SRGB
@@ -14,21 +14,21 @@ import Util
 import Types
 
 
-wheelOfFifths :: Edo
+rainbowOfFifths :: Edo
   -> Int -- ^ how many microtones are in a 3:2 interval
   -> Int -- ^ length of the chain of fifths
   -> Map MidiNote ColorString
-wheelOfFifths edo fifth len =
+rainbowOfFifths edo fifth len =
   M.fromList $
   [ (fifth * i `mod` edo, c)
   | i <- [0..len-1],
-    let c = wheelColor $ fromIntegral i / fromIntegral len ]
+    let c = rainbowColor $ fromIntegral i / fromIntegral len ]
 
 -- | ASSUMES input is in the open interval [0,1).
 -- (1 should give the same output as 0.)
 -- Multiply by 2*pi to think of the input as an angle.
-wheelColor :: Float -> ColorString
-wheelColor f = let
+rainbowColor :: Float -> ColorString
+rainbowColor f = let
   rgb :: RGB Float = hsl (360 * f) 1 0.5
   in concat [ colorUnitFloat_toHex $ f rgb
             | f <- [ channelRed,

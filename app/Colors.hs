@@ -10,7 +10,7 @@ import           Data.Set (Set)
 import qualified Data.Set   as S
 
 import Colors.Simple
-import Colors.Wheel
+import Colors.Rainbow
 import Types
 
 {- | PITFALL:
@@ -131,8 +131,8 @@ color_maps = M.fromList $ [
   (53, colors_for_53_edo),
 
   -- experimental
-  (31, wheelOfFifths 31 18 31),
-  (34, wheelOfFifths 34 20 17),
+  (31, rainbowOfFifths 31 18 31),
+  (34, rainbowOfFifths 34 20 17),
 
   -- See the comment on the corresponding import statements
   -- for why the lines below differ from the lines above.

@@ -37,7 +37,7 @@ executable lumatone-isomorphic
       Colors.Edo60,
       Colors.Simple,
       Colors.Research,
-      Colors.Wheel,
+      Colors.Rainbow,
       Layout,
       Lib,
       Test,
