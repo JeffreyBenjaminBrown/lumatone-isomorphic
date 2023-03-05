@@ -4,6 +4,7 @@ import           Data.Map (Map)
 import qualified Data.Map   as M
 import           Test.HUnit
 
+import Colors
 import Colors.Rainbow
 import Lib
 import Types
@@ -20,7 +21,24 @@ allTests = runTestTT $ TestList
   , test_pad0
   , test_rainbowColor
   , test_rainbowOfFifths
+  , test_middle_board_key_to_edoNote
   ]
+
+test_middle_board_key_to_edoNote :: Test
+test_middle_board_key_to_edoNote = TestCase $ do
+  let right_step = 5
+      downright_step = 3
+      note_shift = 0
+      b :: Map (Board, Key) EdoNote
+      b = board_edoNotes right_step downright_step note_shift
+  -- These tests depend on the particular labeling of the Lumatone geometry
+  -- that its makers decided on. See Layout.hs.
+  assertBool "" $
+    middle_board_key_to_edoNote 0 b + right_step ==
+    middle_board_key_to_edoNote 1 b
+  assertBool "" $
+    middle_board_key_to_edoNote 0 b + downright_step ==
+    middle_board_key_to_edoNote 2 b
 
 test_rainbowOfFifths :: Test
 test_rainbowOfFifths = TestCase $ do

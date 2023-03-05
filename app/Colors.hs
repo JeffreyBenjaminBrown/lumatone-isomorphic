@@ -36,6 +36,14 @@ import Colors.Edo58
 import Colors.Edo60
 
 
+middle_board_key_to_edoNote :: Int -> Map (Board, Key) EdoNote -> EdoNote
+middle_board_key_to_edoNote key = let
+  board = 2
+  errMsg = "middlish_low_key_note: (board,key) "
+           ++ show (board, key) ++ "not found."
+  in maybe (error errMsg) id
+     . M.lookup (board, key)
+
 -- | Identifies the note corresponding to a key near the top
 -- of the middle board, and about half a board to the left of
 -- the note identified by @middlish_high_key_note@.
