@@ -58,20 +58,24 @@ overlay_key_color edo keys color lumatone =
 
 -- * Mapping notes to colors
 
--- | The Edo determines the color map used.
---
--- PITFALL: If it's not an Edo I've made a color map for,
--- I just give it the 50-edo color map,
--- since that's got the maximum possible number of note-color
--- pairs (49, given that there are only 7 colors and 7 notes
--- per color) and is empty almost nowhere.
+{- | In @color overlay edo note@, if @note@ is in @overlay@,
+then that determines the color. If not, then the edo equivalence class
+of the note is found for that edo,
+by using @color_maps :: Map Edo (Map MidiNote ColorString)@.
+
+TODO | PITFALL: There's something unnatural about this,
+as edo equivalence classes were also used to construct the overlay.
+-}
 color ::
   Map MidiNote ColorString
-  -> Edo -> MidiNote -> ColorString
+  -> Edo
+  -> MidiNote
+  -> ColorString
 color overlay edo note =
   let color_map :: Map MidiNote ColorString
-      color_map = maybe colors_for_50_edo id $
-                  M.lookup edo color_maps
+      color_map =
+        maybe colors_for_50_edo id $ {- If it's not an Edo I've made a color map for, I just give it the 50-edo color map, since that's got the maximum possible number of note-color pairs (49, given that there are only 7 colors and 7 notes per color) and is empty almost nowhere. -}
+        M.lookup edo color_maps
   in maybe default_color id $
      M.lookup note $ M.union overlay color_map
 
