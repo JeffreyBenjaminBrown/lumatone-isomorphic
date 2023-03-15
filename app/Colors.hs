@@ -43,17 +43,17 @@ board_key_to_edoNote bk = let
            ++ show bk ++ "not found."
   in maybe (error errMsg) id . M.lookup bk
 
-overlay_key_color ::
+overlay_color_for_keys_on_board ::
   Edo
-  -> [Int] -- ^ keys on the middle board (board 2) to color
+  -> (Board,[Key]) -- ^ keys on a board to color
   -> ColorString
   -> Map (Board, Key) EdoNote
   -> Map MidiNote ColorString
-overlay_key_color edo keys color lumatone =
+overlay_color_for_keys_on_board edo (b,ks) color lumatone =
   M.fromList
-  [ ( mod (board_key_to_edoNote (2,key) lumatone) edo,
+  [ ( mod (board_key_to_edoNote (b,k) lumatone) edo,
       color )
-  | key <- keys ]
+  | k <- ks ]
 
 
 -- * Mapping notes to colors

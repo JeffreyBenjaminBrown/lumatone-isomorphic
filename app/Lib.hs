@@ -87,17 +87,17 @@ shift_channels channel_shift =
   in M.map f
 
 lumatone :: Edo -> EdoNote -> EdoNote -> EdoNote -> MidiChannel
-         -> [Key] -> [Key]
+         -> [(ColorString, Board, [Key])]
          -> Map (Board, Key) KeyData
 lumatone edo right_step downright_step note_shift channel_shift
-         black_keys white_keys = let
+         cbks = let
   m_bk_e :: Map (Board,Key) EdoNote
   m_bk_e = board_edoNotes right_step downright_step note_shift
   up_step = right_step - downright_step
   overlay :: Map MidiNote ColorString
-  overlay = M.union
-    (overlay_key_color edo black_keys color_black m_bk_e)
-    (overlay_key_color edo white_keys color_white m_bk_e)
+  overlay = foldr M.union mempty
+    [ overlay_color_for_keys_on_board edo (b,ks) c m_bk_e
+    | (c,b,ks) <- cbks ]
   in shift_channels channel_shift
      $ nonnegative_keyData
      $ M.map (edoNote_to_keyData overlay edo) m_bk_e
@@ -146,14 +146,14 @@ go :: Edo
    -> EdoNote     -- ^ down-right step
    -> EdoNote     -- ^ midi note shift
    -> MidiChannel -- ^ midi channel shift
-   -> [Key] -> [Key]
+   -> [(ColorString, Board, [Key])]
    -> IO (Map (Board, Key) KeyData)
 go edo right_step downright_step note_shift channel_shift
-   black_keys white_keys = do
+   cbks = do
   let
     l :: Map (Board, Key) KeyData =
       lumatone edo right_step downright_step note_shift channel_shift
-               black_keys white_keys
+               cbks
     s :: [String] =
       concat [ boardStrings b l
              | b <- [0..4] ]
