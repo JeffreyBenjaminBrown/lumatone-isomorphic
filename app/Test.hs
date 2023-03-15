@@ -90,10 +90,10 @@ test_board_edoNotes = TestCase $ do
 
 test_edoNote_to_keyData :: Test
 test_edoNote_to_keyData = TestCase $ do
-  let kd = edoNote_to_keyData id 31 12
+  let kd = edoNote_to_keyData mempty 31 12
   assertBool "channel"     $ keyChannel     kd == 0
   assertBool "note"        $ keyNote        kd == 12
 
-  let kd = edoNote_to_keyData id 31 (31 + 12)
+  let kd = edoNote_to_keyData mempty 31 (31 + 12)
   assertBool "channel"     $ keyChannel     kd == 1
   assertBool "note"        $ keyNote        kd == 12

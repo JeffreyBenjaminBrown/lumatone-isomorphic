@@ -57,9 +57,8 @@ overlay_key_color ::
   -> ColorString
   -> Map (Board, Key) EdoNote
   -> Map MidiNote ColorString
-  -> Map MidiNote ColorString
 overlay_key_color edo keys color lumatone =
-  M.union $ M.fromList
+  M.fromList
   [ ( mod (board_key_to_edoNote (2,key) lumatone) edo,
       color )
   | key <- keys ]
@@ -117,14 +116,14 @@ overlay_highBlack edo up_step boards = let
 -- pairs (49, given that there are only 7 colors and 7 notes
 -- per color) and is empty almost nowhere.
 color ::
-  (Map MidiNote ColorString -> Map MidiNote ColorString)
+  Map MidiNote ColorString
   -> Edo -> MidiNote -> ColorString
 color overlay edo note =
   let color_map :: Map MidiNote ColorString
       color_map = maybe colors_for_50_edo id $
                   M.lookup edo color_maps
   in maybe default_color id $
-     M.lookup note $ overlay color_map
+     M.lookup note $ M.union overlay color_map
 
 -- | This assigns colors to EDO values.
 -- Not every EDO value needs to have a color assigned,

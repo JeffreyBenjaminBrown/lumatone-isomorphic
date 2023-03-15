@@ -22,7 +22,7 @@ type Edo         = Int
 type EdoNote     = Int -- ^ Unbounded int.
 type MidiNote    = Int -- ^ A value in [0,127].
 type MidiChannel = Int -- ^ A value in [0,15], I guess.
-                       -- TODO : Right?
+                       -- TODO : Right? Or is it 1-16?
 
 type ColorString = String
 type Filename = String

@@ -70,8 +70,7 @@ nonnegative_keyData l = let
   in M.map subtract_those l
 
 edoNote_to_keyData ::
-  (Map MidiNote ColorString -> Map MidiNote ColorString)
-  -> Edo -> EdoNote -> KeyData
+  Map MidiNote ColorString -> Edo -> EdoNote -> KeyData
 edoNote_to_keyData overlay e en = let
   midiNote = mod en e
   in KeyData { keyChannel     = div en e,
@@ -95,9 +94,10 @@ lumatone edo right_step downright_step note_shift channel_shift
   m_bk_e :: Map (Board,Key) EdoNote
   m_bk_e = board_edoNotes right_step downright_step note_shift
   up_step = right_step - downright_step
-  overlay :: Map MidiNote ColorString -> Map MidiNote ColorString
-  overlay = overlay_key_color edo black_keys color_black m_bk_e .
-            overlay_key_color edo white_keys color_white m_bk_e
+  overlay :: Map MidiNote ColorString
+  overlay = M.union
+    (overlay_key_color edo black_keys color_black m_bk_e)
+    (overlay_key_color edo white_keys color_white m_bk_e)
   in shift_channels channel_shift
      $ nonnegative_keyData
      $ M.map (edoNote_to_keyData overlay edo) m_bk_e
