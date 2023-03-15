@@ -21,11 +21,11 @@ allTests = runTestTT $ TestList
   , test_pad0
   , test_rainbowColor
   , test_rainbowOfFifths
-  , test_middle_board_key_to_edoNote
+  , test_board_key_to_edoNote
   ]
 
-test_middle_board_key_to_edoNote :: Test
-test_middle_board_key_to_edoNote = TestCase $ do
+test_board_key_to_edoNote :: Test
+test_board_key_to_edoNote = TestCase $ do
   let right_step = 5
       downright_step = 3
       note_shift = 0
@@ -34,11 +34,11 @@ test_middle_board_key_to_edoNote = TestCase $ do
   -- These tests depend on the particular labeling of the Lumatone geometry
   -- that its makers decided on. See Layout.hs.
   assertBool "" $
-    middle_board_key_to_edoNote 0 b + right_step ==
-    middle_board_key_to_edoNote 1 b
+    board_key_to_edoNote (2,0) b + right_step ==
+    board_key_to_edoNote (2,1) b
   assertBool "" $
-    middle_board_key_to_edoNote 0 b + downright_step ==
-    middle_board_key_to_edoNote 2 b
+    board_key_to_edoNote (2,0) b + downright_step ==
+    board_key_to_edoNote (2,2) b
 
 test_rainbowOfFifths :: Test
 test_rainbowOfFifths = TestCase $ do

@@ -36,13 +36,12 @@ import Colors.Edo58
 import Colors.Edo60
 
 
-middle_board_key_to_edoNote :: Key -> Map (Board, Key) EdoNote -> EdoNote
-middle_board_key_to_edoNote key = let
-  board = 2
-  errMsg = "middle_board_key_to_edoNote: (board,key) "
-           ++ show (board, key) ++ "not found."
-  in maybe (error errMsg) id
-     . M.lookup (board, key)
+board_key_to_edoNote ::
+  (Board,Key) -> Map (Board, Key) EdoNote -> EdoNote
+board_key_to_edoNote bk = let
+  errMsg = "board_key_to_edoNote: (board,key) "
+           ++ show bk ++ "not found."
+  in maybe (error errMsg) id . M.lookup bk
 
 {- | TODO replace every instance of these:
   @
@@ -61,7 +60,7 @@ overlay_key_color ::
   -> Map MidiNote ColorString
 overlay_key_color edo keys color lumatone =
   M.union $ M.fromList
-  [ ( mod (middle_board_key_to_edoNote key lumatone) edo,
+  [ ( mod (board_key_to_edoNote (2,key) lumatone) edo,
       color )
   | key <- keys ]
 
@@ -88,7 +87,7 @@ overlay_lowWhite ::
   -> Map MidiNote ColorString
   -> Map MidiNote ColorString
 overlay_lowWhite edo up_step boards = let
-  low  :: EdoNote = middle_board_key_to_edoNote 46 boards
+  low  :: EdoNote = board_key_to_edoNote (2,46) boards
   overlay = M.fromList [ (low                 `mod` edo, color_white),
                          ((low +     up_step) `mod` edo, color_white),
                          ((low + 2 * up_step) `mod` edo, color_white) ]
@@ -101,7 +100,7 @@ overlay_highBlack ::
   -> Map MidiNote ColorString
   -> Map MidiNote ColorString
 overlay_highBlack edo up_step boards = let
-  high :: Int = middle_board_key_to_edoNote 21 boards
+  high :: Int = board_key_to_edoNote (2,21) boards
   overlay = M.fromList [ (high                 `mod` edo, color_black),
                          ((high +     up_step) `mod` edo, color_black),
                          ((high + 2 * up_step) `mod` edo, color_black) ]
