@@ -8,5 +8,6 @@ import Data.Char
 
 import Lib
 import Types
+import Colors.Simple
 import Colors.Research
 import Colors.Rainbow
