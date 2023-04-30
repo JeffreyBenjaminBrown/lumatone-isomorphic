@@ -137,6 +137,28 @@ go 41 6 (-1)  00 00 [] []
 go 41 6 (-1)  22 00 [] []
 go 41 7   03  00 00 [] []
 go 41 7   03  09 01 [] []
+:{
+go 46 4   11  01 00 -- sawteeth
+  [ (color_black, 2, [38,33,27])
+  -- If the black rows created by the line above lie "at the octave",
+  -- then the ones created by the lines below lie "at the half-octave".
+  , (color_black, 2, [48, 42])
+  , (color_black, 3, [19])
+  ]
+:}
+:{
+go 46 4   11  01 00 -- A solid black column at the octave,
+                    -- and a "striped" black column at the half-octave.
+  [ -- The white notes below turned out not to help.
+  (color_black, 2, [38,33,27,22,16,11])
+  -- The above are a black rows "at the octave"
+  -- The rest of these are the rows "at the half-octave".
+  , (color_black, 2, [48])
+  --, (color_white, 2, [42])
+  , (color_black, 3, [19,8])
+  --, (color_white, 3, [13,3])
+  ]
+:}
 go 46 4   11  01 00 [(color_black, 2, [38,33,27,22,16,11])]
 go 46 4   11  01 00 [] []
 go 46 4   11  15 00 [] []
