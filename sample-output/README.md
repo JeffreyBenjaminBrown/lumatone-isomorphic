@@ -139,7 +139,7 @@ go 41 7   03  00 00 [] []
 go 41 7   03  09 01 [] []
 :{
 go 46 4   11  01 00 -- sawteeth
-  [ (color_black, 2, [38,33,27])
+  [ (color_black, 2, [22,16,11])
   -- If the black rows created by the line above lie "at the octave",
   -- then the ones created by the lines below lie "at the half-octave".
   , (color_black, 2, [48, 42])
