@@ -95,11 +95,11 @@ color_maps = M.fromList $ [
   (31, rainbowOfFifths 31 18 31),
   (34, rainbowOfFifths 34 20 17),
   (46, rainbowOfFifths 46 27 46),
+  (58, rainbowOfFifths 58 34 29),
 
   -- See the comment on the corresponding import statements
   -- for why the lines below differ from the lines above.
   (29, Colors.Edo29.theMap),
-  (58, Colors.Edo58.theMap),
   (60, Colors.Edo60.theMap)
   ]
 

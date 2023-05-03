@@ -173,6 +173,13 @@ go 53 9   04  00 00 [] []
 go 53 9   04  11 01 [] []
 go 58 6   11  00 00 [] []
 go 58 6   11  26 00 [] []
+:{ -- 58edo.8right.5downright.sawtooth.ltn
+go 58 8   05  00 00
+  [ (color_white, 2, [5,6]) -- These two white keys appear both at the top
+  -- and at the bottom of the keyboard.
+  , (color_white, 3, [13,25,28,29]) -- These appear in the middle.
+  ]
+:}
 go 58 8   05  00 00 [] []
 go 58 8   05  04 00 [] []
 go 60 5   07  00 00 [] []
