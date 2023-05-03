@@ -154,15 +154,15 @@ go edo right_step downright_step note_shift channel_shift
     l :: Map (Board, Key) KeyData =
       lumatone edo right_step downright_step note_shift channel_shift
                cbks
-    s :: [String] =
+    file_content :: [String] =
       concat [ boardStrings b l
              | b <- [0..4] ]
-    p :: String =
+    dest_path :: String =
       output_path edo right_step downright_step note_shift channel_shift
   if note_shift < 0 || channel_shift < 0
     then putStrLn $ "WARNING: At least one of the arguments note_shift and channel_shift is < 0. Some values will therefore be negative. The result is (I believe) invalid MIDI. Outputting result despite this madness."
     else return ()
-  t :: [String] <-
+  file_tail :: [String] <-
     lines <$> readFile "data/tail.txt"
-  writeFile p $ unlines $ s ++ t
+  writeFile dest_path $ unlines $ file_content ++ file_tail
   return l
