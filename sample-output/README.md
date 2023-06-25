@@ -127,6 +127,15 @@ go 12 4   05  60 00 [] []
 go 24 5   04  00 00 [] []
 go 29 5   02  00 00 [] []
 go 31 5   03  00 00 [] []
+-- 34edo.7right.3downright.rainbow_2-white_2-gray.ltn
+-- Two adjacent white dots in one black column,
+-- and two adjacent gray dots in a different one,
+-- vertically offset.
+-- PITFALL | TODO: Rediscover the white and gray positions.
+gray  = [1,2] -- lies
+white = [3,4] -- lies
+go 34 7   03  0  0 [ (color_white, 2, white), (color_gray, 2, gray) ]
+
 go 34 3   11  00 00 [] []
 go 34 7   03  01 00 [] [37,32,26,21,15,10]
 go 34 3   08  00 00 [] []
@@ -148,6 +157,7 @@ go 46 4   11  01 00 -- "sawtooth"
   , (color_black, 3, [19,13])
   ]
 :}
+
 :{
 go 46 4   11  01 00 -- A solid black column at the octave,
                     -- and a "striped" black column at the half-octave.
@@ -161,6 +171,7 @@ go 46 4   11  01 00 -- A solid black column at the octave,
   --, (color_white, 3, [13,3])
   ]
 :}
+
 go 46 4   11  01 00 [(color_black, 2, [38,33,27,22,16,11])]
 go 46 4   11  01 00 [] []
 go 46 4   11  15 00 [] []
@@ -173,13 +184,17 @@ go 53 9   04  00 00 [] []
 go 53 9   04  11 01 [] []
 go 58 6   11  00 00 [] []
 go 58 6   11  26 00 [] []
-:{ -- 58edo.8right.5downright.sawtooth.ltn
-go 58 8   05  00 00
-  [ (color_white, 2, [5,6]) -- These two white keys appear both at the top
-  -- and at the bottom of the keyboard.
-  , (color_white, 3, [13,25,28,29]) -- These appear in the middle.
+
+:{
+-- 58edo.8right.5downright.rainbow-and-more-fifths.ltn
+go 58 8   05  00 00 -- The 7 white or gray notes are a cycle of fifths.
+                    -- (Making them all white was visually confusing.)
+  [ (color_white, 1, [ 17, 30 ] )     -- F, G
+  , (color_white, 2, [ 25, 38 ] )     -- A, B
+  , (color_gray,  2, [ 15, 28, 41 ] ) -- C, D, E
   ]
 :}
+
 go 58 8   05  00 00 [] []
 go 58 8   05  04 00 [] []
 go 60 5   07  00 00 [] []
