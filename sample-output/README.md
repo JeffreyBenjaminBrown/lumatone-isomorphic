@@ -127,6 +127,10 @@ go 12 4   05  60 00 [] []
 go 24 5   04  00 00 [] []
 go 29 5   02  00 00 [] []
 go 31 5   03  00 00 [] []
+
+-- sample-output/31edo.5right.3downright.2-black-adjacent.ltn
+go 31 5   03  0  0 [ (color_black, 2, [10,15] ) ]
+
 -- 34edo.7right.3downright.rainbow_2-white_2-gray.ltn
 -- Two adjacent white dots in one black column,
 -- and two adjacent gray dots in a different one,
@@ -178,6 +182,10 @@ go 46 4   11  15 00 [] []
 go 46 4   11  29 00 [] []
 go 46 5   07  00 00 [] []
 go 46 5   07  13 00 [] []
+
+-- 50edo.8right.5downright.rainbow.3-white.ltn
+go 50 8   05  0  0 [ (color_white, 2, [16,27,38] ) ]
+
 go 50 8   05  00 00 [] []
 go 50 8   05  20 00 [] []
 go 53 9   04  00 00 [] []

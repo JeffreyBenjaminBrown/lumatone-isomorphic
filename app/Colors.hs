@@ -88,13 +88,13 @@ color overlay edo note =
 color_maps :: Map Edo (Map MidiNote ColorString)
 color_maps = M.fromList $ [
   (41, colors_for_41_edo),
-  (50, colors_for_50_edo),
   (53, colors_for_53_edo),
 
   -- experimental
-  (31, rainbowOfFifths 31 18 31),
+  (31, rainbowOfFifths 31  9 31), -- PITFALL: 9\31 = 11:9, not 3:2.
   (34, rainbowOfFifths 34 20 17),
   (46, rainbowOfFifths 46 27 46),
+  (50, rainbowOfFifths 50 16 25), -- PITFALL: 16\50 = 5:4, not 3:2.
   (58, rainbowOfFifths 58 34 29),
 
   -- See the comment on the corresponding import statements
