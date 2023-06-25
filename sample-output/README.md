@@ -203,6 +203,17 @@ go 58 8   05  00 00 -- The 7 white or gray notes are a cycle of fifths.
   ]
 :}
 
+:{
+-- 58edo.8right.5downright.white-gray-box.ltn
+go 58 8   05  00 00
+  [ (color_white, 1, [ 17, 30 ] )     -- F, G
+  , (color_white, 2, [ 25, 38 ] )     -- A, B
+  , (color_gray,  2, [ 14, 15, 16,    -- C=15
+                       40, 41, 42 ] ) -- E=41
+  ]
+:}
+
+
 go 58 8   05  00 00 [] []
 go 58 8   05  04 00 [] []
 go 60 5   07  00 00 [] []
