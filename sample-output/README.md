@@ -126,6 +126,10 @@ so that it can be sensibly line-sorted in Emacs.)
 go 12 4   05  60 00 [] []
 go 24 5   04  00 00 [] []
 go 29 5   02  00 00 [] []
+
+-- 29edo.5right.2downright.rainbow-black-stripe.ltn
+go 29 5   02  0  0 [ (color_black, 2, [24,29,35,40] ) ]
+
 go 31 5   03  00 00 [] []
 
 -- sample-output/31edo.5right.3downright.2-black-adjacent.ltn
