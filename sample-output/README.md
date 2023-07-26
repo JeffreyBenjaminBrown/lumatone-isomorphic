@@ -154,6 +154,28 @@ go 41 6 (-1)  00 00 [] []
 go 41 6 (-1)  22 00 [] []
 go 41 7   03  00 00 [] []
 go 41 7   03  09 01 [] []
+
+:{
+go 46 4   11  01 00 -- "2-edge-1-center"
+  {- Here the half-octave markers (top and bottom of keyboard) use 2 keys,
+  and the octave marker (middle of keyboard) uses only 1. -}
+  [ (color_black, 2, [6,11]) -- the "half-octaves"
+  , (color_black, 3, [19])   -- the "octaves"
+  ]
+:}
+
+:{
+go 46 4   11  01 00 -- "sawtooth-minimal"
+  {- Here both half-octave and octave markers use only 1 key.
+  The "half-octaves" appear at the top and bottom,
+  while the "octaves" are centered. -}
+  [ (color_black, 2, [11]) -- the "half-octaves"
+  -- If the black key above lies "at the half-octave",
+  -- then the black key below lies "at the octave".
+  , (color_black, 3, [19])
+  ]
+:}
+
 :{
 go 46 4   11  01 00 -- "sawtooth"
   {- Here both half-octave and octave markers use 2 keys.
