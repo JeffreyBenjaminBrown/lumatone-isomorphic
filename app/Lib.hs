@@ -14,6 +14,31 @@ import Layout
 import Types
 
 
+-- | Writes all complete (no missing notes)
+-- layouts for edos 1 through 60 to disk.
+-- Takes a long time. Colors will in many cases be strange,
+-- but repeat at the octave.
+make_all_layouts :: IO ()
+make_all_layouts = do
+  let params = [ (edo, right_step, down_right_step)
+               | edo <- [1..60],
+                 let max_jump = edo `div` 2,
+                 right_step <- [1 .. max_jump],
+                 down_right_step <- [-max_jump .. max_jump],
+                 relativelyPrime right_step down_right_step ]
+      go' (edo,rs,drs) = go edo rs drs 0 1 []
+  mapM_ go' params
+
+-- | PITFALL: This is BAD for big numbers.
+-- But I doubt it matters for my purposes.
+-- todo ? speed
+relativelyPrime :: Integral a => a -> a -> Bool
+relativelyPrime x y =
+  elem 1 [x, y]
+  || elem 1 ( fmap
+              (flip mod x . (*) y)
+              [1..x] )
+
 board_keys :: [ (Board, Key) ]
 board_keys = [ (b,k)
              | b <- [0..4],
