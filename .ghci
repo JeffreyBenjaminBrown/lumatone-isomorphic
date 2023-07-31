@@ -5,9 +5,9 @@ import Data.Colour.SRGB
 import Numeric
 import Data.Char
 
-
-import Lib
-import Types
-import Colors.Simple
-import Colors.Research
 import Colors.Rainbow
+import Colors.Research
+import Colors.Simple
+import Lib
+import Touch
+import Types

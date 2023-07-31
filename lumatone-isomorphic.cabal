@@ -35,14 +35,15 @@ executable lumatone-isomorphic
       Colors.Edo46,
       Colors.Edo58,
       Colors.Edo60,
-      Colors.Simple,
-      Colors.Research,
       Colors.Rainbow,
+      Colors.Research,
+      Colors.Simple,
       Layout,
       Lib,
       Test,
-      Util,
-      Types
+      Touch,
+      Types,
+      Util
 
     -- LANGUAGE extensions used by modules in this package.
     -- other-extensions:
