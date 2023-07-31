@@ -19,13 +19,13 @@ expRange a b = let bottom = exp a
 -- * Generating data
 
 -- | A string like this belongs near the end of any .ltn file.
-polynomial_LumaTouchConfig_string :: Float -> Float -> String
-polynomial_LumaTouchConfig_string e c =
-  "LumaTouchConfig=" ++
+polynomial_NoteOnOffVelocityCrvTbl_string :: Float -> Float -> String
+polynomial_NoteOnOffVelocityCrvTbl_string e c =
+  "NoteOnOffVelocityCrvTbl=" ++
   (concat $ intersperse " " $ map show $ polynomial e c)
 
 -- | PURPOSE:
--- Define the `LumaTouchConfig` parameter,
+-- Define the `NoteOnOffVelocityCrvTbl` parameter,
 -- which is encoded at the end of `data/tail.txt`.
 --
 -- WHAT IT DOES:

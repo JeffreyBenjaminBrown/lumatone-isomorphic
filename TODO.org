@@ -1,3 +1,9 @@
 * TODO Compare exponential and polynomial velocity curves.
   See the functions `polynomial` and `expRange` in `Touch.hs`.
 * TODO Specify black keys as notes, not keys.
+* TODO Do I need the LumaTouchConfig parameter?
+  Because I accidentally defined it to be the velocity curve I wanted,
+  thinking it was the parameter that defines velocity,
+  and I lost whatever the original value was.
+  That happened slightly before (on the same day as) commit
+    006be9af0cc3edf6e1b64d1b1d98571dc2b80d73
