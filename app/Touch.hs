@@ -3,6 +3,19 @@ module Touch where
 import Data.List (intersperse)
 
 
+-- * Exploring curves might be better.
+
+-- | All that seems to matter is (b - a),
+-- so this is simpler than `expRange` and achieves the same thing.
+expRange' b = let top = exp b
+              in (exp (b/2) - 1) / exp b
+
+-- | But this is easier for a human to understand.
+expRange a b = let bottom = exp a
+                   top = exp b
+               in (exp ((a+b)/2) - exp a) / exp b
+
+
 -- * Generating data
 
 -- | A string like this belongs near the end of any .ltn file.

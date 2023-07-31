@@ -1,1 +1,3 @@
+* TODO Compare exponential and polynomial velocity curves.
+  See the functions `polynomial` and `expRange` in `Touch.hs`.
 * TODO Specify black keys as notes, not keys.
