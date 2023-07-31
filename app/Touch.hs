@@ -1,13 +1,22 @@
 module Touch where
 
+import Data.List (intersperse)
+
 
 -- * Generating data
+
+-- | A string like this belongs near the end of any .ltn file.
+polynomial_LumaTouchConfig_string :: Float -> Float -> String
+polynomial_LumaTouchConfig_string e c =
+  "LumaTouchConfig=" ++
+  (concat $ intersperse " " $ map show $ polynomial e c)
 
 -- | PURPOSE:
 -- Define the `LumaTouchConfig` parameter,
 -- which is encoded at the end of `data/tail.txt`.
 --
 -- WHAT IT DOES:
+-- See also the excellent comments in the type signature.
 -- It generates a list of 128 floats, the first equal to 1,
 -- the last equal to 127, rising likea some polynomial function,
 -- with a positive second derivative.
@@ -20,13 +29,20 @@ module Touch where
 -- `c` just lets you interpolate between a linear curve and "the"
 -- polynomial, which is basically invariant as soon (which is's quite soon)
 -- as `c` is big enough.
-polynomial :: Float -> Float -> [Int]
+-- For higher values of `e`,
+-- the midpoint of the curve can be closer to 0.
+-- For instance, if e=2, the midpoint can be no lower than 127/4.
+-- (It is higher for low values of `c`.)
+polynomial :: Float -- ^ A real value greater than 1.
+           -> Float -- ^ A real value no less than 0.
+           -> [Int] -- ^ A length-128 of integers from 1 to 127.
 polynomial e c =
   let f :: Float -> Float
       f x = x + (x*c)**e
       f127 = f 127
   in [ round $ 126 * f x / f127 + 1
      | x <- [0..127] ]
+
 
 -- * Lumatone Editor-generate data
 
