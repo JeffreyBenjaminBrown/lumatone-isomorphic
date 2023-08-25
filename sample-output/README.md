@@ -214,6 +214,16 @@ go 50 8   05  0  0 [ (color_white, 2, [16,27,38] ) ]
 
 go 50 8   05  00 00 [] []
 go 50 8   05  20 00 [] []
+
+:{
+-- TODO : 53 experiment
+go 53 7 4 00 00 -- 53edo.7right.4downright.2-horiz-2-vert.ltn
+  [ -- copied from 46-edo "2-edge-1-center" above
+    (color_black, 2, [0,2])   -- the "octaves"
+  , (color_black, 3, [27,28]) -- the "half-octaves"
+  ]
+:}
+
 go 53 9   04  00 00 [] []
 go 53 9   04  11 01 [] []
 go 58 6   11  00 00 [] []

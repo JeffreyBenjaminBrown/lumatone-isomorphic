@@ -96,6 +96,7 @@ color_maps = M.fromList $ [
   (34, rainbowOfFifths 34 20 17),
   (46, rainbowOfFifths 46  9 46), -- 9\27 = 8:7 = (3:2)^(1/3)
   (50, rainbowOfFifths 50 16 25), -- 16\50 = 5:4
+  (53, rainbowOfFifths 53 31 53), -- 31\53 = 3:2
   (58, rainbowOfFifths 58 34 29),
 
   -- See the comment on the corresponding import statements
