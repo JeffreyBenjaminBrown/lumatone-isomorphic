@@ -20,7 +20,7 @@ allTests = runTestTT $ TestList
   , test_colorUnitFloat_toHex
   , test_pad0
   , test_rainbowColor
-  , test_rainbowOfFifths
+  , test_rainbow
   , test_board_key_to_edoNote
   ]
 
@@ -40,9 +40,9 @@ test_board_key_to_edoNote = TestCase $ do
     board_key_to_edoNote (2,0) b + downright_step ==
     board_key_to_edoNote (2,2) b
 
-test_rainbowOfFifths :: Test
-test_rainbowOfFifths = TestCase $ do
-  assertBool "" $ rainbowOfFifths 12 7 3
+test_rainbow :: Test
+test_rainbow = TestCase $ do
+  assertBool "" $ rainbow 12 7 3
     == M.fromList [ (0,"ff0000")
                   , (7,"0000ff")
                   , (2,"00ff00") ]

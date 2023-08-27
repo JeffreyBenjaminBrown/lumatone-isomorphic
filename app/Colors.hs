@@ -91,13 +91,14 @@ color_maps = M.fromList $ [
   (53, colors_for_53_edo),
 
   -- experimental
-  (29, rainbowOfFifths 29  5 29), -- 6 = 4/3^(1/2). 5 = 9/8.
-  (31, rainbowOfFifths 31  9 31), -- 9\31 = 11:9 = (3:2) ^ (1/2)
-  (34, rainbowOfFifths 34 20 17),
-  (46, rainbowOfFifths 46  9 46), -- 9\27 = 8:7 = (3:2)^(1/3)
-  (50, rainbowOfFifths 50 16 25), -- 16\50 = 5:4
-  (53, rainbowOfFifths 53 31 53), -- 31\53 = 3:2
-  (58, rainbowOfFifths 58 34 29),
+  (29, rainbow 27 16 27), -- 16\27 = 3:2
+  (29, rainbow 29  5 29), -- 6 = 4/3^(1/2). 5 = 9/8.
+  (31, rainbow 31  9 31), -- 9\31 = 11:9 = (3:2) ^ (1/2)
+  (34, rainbow 34 20 17),
+  (46, rainbow 46  9 46), -- 9\27 = 8:7 = (3:2)^(1/3)
+  (50, rainbow 50 16 25), -- 16\50 = 5:4
+  (53, rainbow 53 31 53), -- 31\53 = 3:2
+  (58, rainbow 58 34 29),
 
   -- See the comment on the corresponding import statements
   -- for why the lines below differ from the lines above.

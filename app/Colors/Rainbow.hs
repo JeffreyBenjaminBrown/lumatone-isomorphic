@@ -90,13 +90,13 @@ reps_until_entering edo trap unit =
      [ mod (i * unit) edo
      | i <- [1 ..edo] ]
 
-rainbowOfFifths :: Edo
-  -> Int -- ^ How many microtones are in a 3:2 interval. To find a good value of this, use `units_avoiding_bad_and_finding_good`.
-  -> Int -- ^ length of the chain of fifths
+rainbow :: Edo
+  -> Int -- ^ The number of microtones by which to space out adjacent colors. To find a good value of this, use `units_avoiding_bad_and_finding_good`.
+  -> Int -- ^ length of the chain of units
   -> Map MidiNote ColorString
-rainbowOfFifths edo fifth len =
+rainbow edo unitInterval len =
   M.fromList $
-  [ (fifth * i `mod` edo, c)
+  [ (unitInterval * i `mod` edo, c)
   | i <- [0..len-1],
     let c = rainbowColor $ fromIntegral i / fromIntegral len ]
 
