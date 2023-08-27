@@ -52,6 +52,7 @@ executable lumatone-isomorphic
       base,
       colour,
       containers,
-      extra
+      extra,
+      lens
     hs-source-dirs:   app
     default-language: Haskell2010

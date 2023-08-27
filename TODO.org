@@ -1,3 +1,4 @@
+* TODO the unit interval across which colors are spread out should be a parameter to `go`, and part of the filename.
 * TODO Compare exponential and polynomial velocity curves.
   See the functions `polynomial` and `expRange` in `Touch.hs`.
 * TODO Specify black keys as notes, not keys.
