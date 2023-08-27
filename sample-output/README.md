@@ -156,56 +156,12 @@ go 41 7   03  00 00 [] []
 go 41 7   03  09 01 [] []
 
 :{
-go 46 4   11  01 00 -- "2-edge-1-center"
-  {- Here the half-octave markers (top and bottom of keyboard) use 2 keys,
-  and the octave marker (middle of keyboard) uses only 1. -}
-  [ (color_black, 2, [6,11]) -- the "half-octaves"
-  , (color_black, 3, [19])   -- the "octaves"
+go 46 4   11  01 00 -- 46edo.4right.11downright.+1notes.2-vert-2-horiz.ltn
+  [ (color_black, 2, [6,11])  -- a vertical pair
+  , (color_black, 3, [19,20]) -- a horizontal pair
   ]
 :}
 
-:{
-go 46 4   11  01 00 -- "sawtooth-minimal"
-  {- Here both half-octave and octave markers use only 1 key.
-  The "half-octaves" appear at the top and bottom,
-  while the "octaves" are centered. -}
-  [ (color_black, 2, [11]) -- the "half-octaves"
-  -- If the black key above lies "at the half-octave",
-  -- then the black key below lies "at the octave".
-  , (color_black, 3, [19])
-  ]
-:}
-
-:{
-go 46 4   11  01 00 -- "sawtooth"
-  {- Here both half-octave and octave markers use 2 keys.
-  The "half-octaves" appear at the top and bottom,
-  while the "octaves" are centered. -}
-  [ (color_black, 2, [10,5]) -- the "half-octaves"
-  -- If the two black keys above lie "at the half-octave",
-  -- then the two black keys below lie "at the octave".
-  , (color_black, 3, [19,13])
-  ]
-:}
-
-:{
-go 46 4   11  01 00 -- A solid black column at the octave,
-                    -- and a "striped" black column at the half-octave.
-  [ -- The white notes below turned out not to help.
-  (color_black, 2, [38,33,27,22,16,11])
-  -- The above are a black rows "at the octave"
-  -- The rest of these are the rows "at the half-octave".
-  , (color_black, 2, [48])
-  --, (color_white, 2, [42])
-  , (color_black, 3, [19,8])
-  --, (color_white, 3, [13,3])
-  ]
-:}
-
-go 46 4   11  01 00 [(color_black, 2, [38,33,27,22,16,11])]
-go 46 4   11  01 00 [] []
-go 46 4   11  15 00 [] []
-go 46 4   11  29 00 [] []
 go 46 5   07  00 00 [] []
 go 46 5   07  13 00 [] []
 
@@ -216,42 +172,29 @@ go 50 8   05  00 00 [] []
 go 50 8   05  20 00 [] []
 
 :{
--- TODO : 53 experiment
 go 53 7 4 00 00 -- 53edo.7right.4downright.2-horiz-2-vert.ltn
   [ -- copied from 46-edo "2-edge-1-center" above
-    (color_black, 2, [0,2])   -- the "octaves"
-  , (color_black, 3, [27,28]) -- the "half-octaves"
+    (color_black, 2, [0,2])  -- a down-right pair
+  , (color_black, 3, [23,24]) -- a horizontal pair
   ]
 :}
 
-go 53 9   04  00 00 [] []
+go 53 9   04  00 00 [] [] -- Bosanquet
 go 53 9   04  11 01 [] []
-go 58 6   11  00 00 [] []
-go 58 6   11  26 00 [] []
 
 :{
--- 58edo.8right.5downright.rainbow-and-more-fifths.ltn
-go 58 8   05  00 00 -- The 7 white or gray notes are a cycle of fifths.
-                    -- (Making them all white was visually confusing.)
-  [ (color_white, 1, [ 17, 30 ] )     -- F, G
-  , (color_white, 2, [ 25, 38 ] )     -- A, B
-  , (color_gray,  2, [ 15, 28, 41 ] ) -- C, D, E
-  ]
-:}
-
-:{
--- 58edo.8right.5downright.white-gray-box.ltn
+-- 58edo.8right.5downright.4-white-2-gray.ltn
+--go 58 8   05  04 00
 go 58 8   05  00 00
   [ (color_white, 1, [ 17, 30 ] )     -- F, G
   , (color_white, 2, [ 25, 38 ] )     -- A, B
-  , (color_gray,  2, [ 14, 15, 16,    -- C=15
-                       40, 41, 42 ] ) -- E=41
+  , (color_gray,  2, [ 15, 41 ] )     -- C, E (28 would be D)
   ]
 :}
 
+go 58 6   11  00 00 [] []
+go 58 6   11  26 00 [] []
 
-go 58 8   05  00 00 [] []
-go 58 8   05  04 00 [] []
 go 60 5   07  00 00 [] []
 go 60 7   09  00 00 [] []
 ```
