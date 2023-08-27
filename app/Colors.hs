@@ -91,7 +91,7 @@ color_maps = M.fromList $ [
   (53, colors_for_53_edo),
 
   -- experimental
-  (29, rainbow 27 16 27), -- 16\27 = 3:2
+  (27, rainbow 27 16 27), -- 16\27 = 3:2
   (29, rainbow 29  5 29), -- 6 = 4/3^(1/2). 5 = 9/8.
   (31, rainbow 31  9 31), -- 9\31 = 11:9 = (3:2) ^ (1/2)
   (34, rainbow 34 20 17),
