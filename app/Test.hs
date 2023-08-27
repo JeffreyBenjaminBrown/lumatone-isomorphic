@@ -22,7 +22,15 @@ allTests = runTestTT $ TestList
   , test_rainbowColor
   , test_rainbow
   , test_board_key_to_edoNote
+  , test_reps_until_entering
   ]
+
+test_reps_until_entering :: Test
+test_reps_until_entering = TestCase $ do
+  assertBool "Takes 2 reps for a unit of 5 to enter the set [10]." $
+    all id [reps_until_entering x [10] 5 == 2 | x <- [31,41,46,48] ]
+  assertBool "takes 3 reps for a unit of 10 to enter [1,2] in 31-edo, because 3*10 = 30 is equal to -1 mod 31 and abs (-1) is in [1,2]." $
+    reps_until_entering 31 [1,2] 10 == 3
 
 test_board_key_to_edoNote :: Test
 test_board_key_to_edoNote = TestCase $ do
