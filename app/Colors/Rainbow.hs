@@ -24,9 +24,10 @@ import Types
 -- and then prints a ranking of the color-spacing intervals
 -- by how long they take to avoid that double-ring,
 -- showing how long they take also to find 3:2 = 31\53 and 11:8 = 37\53.
-doubleRingCalculation = let immed = [3,4,7]
-        immed_and_negs = immed ++ map (*(-1)) immed
-        ring2 = immed_and_negs ++ [ a + b |
+doubleRingCalculation = let
+  immed = [3,4,7]
+  immed_and_negs = immed ++ map (*(-1)) immed
+  ring2 = immed_and_negs ++ [ a + b |
                                     a <- immed_and_negs,
                                     b <- immed_and_negs]
     in myPrint $ units_avoiding_bad_and_finding_good 53 ring2 [31,37]
