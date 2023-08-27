@@ -1,3 +1,5 @@
+-- | FOR DOCUMENTATION: See `data/README.md`.
+
 module Touch where
 
 import Data.List (intersperse)
@@ -46,8 +48,8 @@ polynomial_NoteOnOffVelocityCrvTbl_string e c =
 -- the midpoint of the curve can be closer to 0.
 -- For instance, if e=2, the midpoint can be no lower than 127/4.
 -- (It is higher for low values of `c`.)
-polynomial :: Float -- ^ A real value greater than 1.
-           -> Float -- ^ A real value no less than 0.
+polynomial :: Float -- ^ The exponent. A real value greater than 1.
+           -> Float -- ^ The scale factor. A real value no less than 0.
            -> [Int] -- ^ A length-128 of integers from 1 to 127.
 polynomial e c =
   let f :: Float -> Float
