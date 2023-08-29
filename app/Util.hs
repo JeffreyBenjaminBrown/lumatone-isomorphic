@@ -10,3 +10,10 @@ myPrint = mapM_ $ putStrLn . show
 -- Does not shorten the string.
 pad0 :: forall a. Integral a => a -> String -> String
 pad0 n x = take (fromIntegral n - length x) (cycle "0") ++ x
+
+relativelyPrime :: Int -> Int -> Bool
+relativelyPrime modulus spacing =
+  elem 1 [modulus, spacing]
+  || elem 1 ( fmap
+              (flip mod modulus . (*) spacing)
+              [1..modulus] )

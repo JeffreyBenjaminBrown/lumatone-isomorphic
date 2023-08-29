@@ -140,11 +140,11 @@ go 29 5   02  0  0 [ (color_black, 2, [24,29,35,40] ) ]
 -- 31edo.5right.3downright.2-vert.ltn
 go 31 5   03  0  0 [ (color_black, 2, [10,15] ) ]
 
--- 34edo.3right.11downright.2-horiz-black.ltn
-go 34 3   11  00 00 [ (color_black, 2, [0,1] ) ]
+-- 34edo.3right.11downright.black-2-horiz-2-vert.ltn
+go 34 3   11  00 00 [ (color_black, 2, [0,1, 14,20] ) ]
 
--- 34edo.7right.3downright.2-horiz-black.ltn
-go 34 7   03  00 00 [ (color_black, 2, [0,1] ) ]
+-- 34edo.7right.3downright.black-2-horiz-2-vert.ltn
+go 34 7   03  00 00 [ (color_black, 2, [0,1, 14,20] ) ]
 
 go 41 6 (-1)  00 00 [] []
 go 41 6 (-1)  22 00 [] []

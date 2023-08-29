@@ -35,6 +35,10 @@ doubleRingCalculation = let
 -- | TODO:
 -- Incorporate the idea in `doubleRingCalculation` above.
 --
+-- PITFALL:
+-- Only considers (edo,unit) pairs that are relatively prime.
+-- Other pairs may, however, also be of interest.
+--
 -- PURPOSE:
 -- Run `reps_until_entering` a lot,
 -- to find nice values of `unit`.
@@ -47,6 +51,8 @@ doubleRingCalculation = let
 -- and list how long they take to find the perfect fifth (31\53)
 -- and 13th harmonic (37\53):
 --   myPrint $ units_avoiding_bad_and_finding_good 53 [0,1,3,4,6,7,8,10,11,14] [31,37]
+-- Similar, for 34-edo:
+--   myPrint $ units_avoiding_bad_and_finding_good 34 [3,8,11,6,16,14,22,19,29] [20]
 units_avoiding_bad_and_finding_good ::
   Edo ->
   [Int] -> -- ^ The "bad trap". Values to avoid for as long as possible. The list is sorted on the length it takes to avoid these.
@@ -59,7 +65,8 @@ units_avoiding_bad_and_finding_good edo bad good =
                    g <- good ] )
   in L.sortOn (^. _2)
      [ f unit
-     | unit <- [1..ceiling (fromIntegral edo / 2)] ]
+     | unit <- [1..ceiling (fromIntegral edo / 2)],
+       relativelyPrime unit edo ]
 
 -- | FUNCTION:
 -- `reps_until_entering edo unit trap`
