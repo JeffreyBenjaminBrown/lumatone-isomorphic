@@ -126,10 +126,11 @@ so that it can be sensibly line-sorted in Emacs.)
 go 12 4   05  60 00 [] []
 go 24 5   04  00 00 [] []
 
--- 27edo.4right.7downright.2-downright.ltn
-go 27 4   07  00 00 [ (color_black, 2, [0,2] ) ]
--- 27edo.4right.3downright.2-downright.ltn
-go 27 4   03  00 00 [ (color_black, 2, [0,2] ) ]
+-- 27edo.4right.7downright.black-2-horiz-2-dr.ltn
+-- The black markers could be more evenly spaced,
+-- but this way they cover more colors, which I think I prefer.
+-- TODO : Do I prefer?
+go 27 4   07  00 00 [ (color_black, 2, [0,2,23,24] ) ]
 
 go 29 5   02  00 00 [] []
 
@@ -139,21 +140,12 @@ go 29 5   02  0  0 [ (color_black, 2, [24,29,35,40] ) ]
 -- 31edo.5right.3downright.2-vert.ltn
 go 31 5   03  0  0 [ (color_black, 2, [10,15] ) ]
 
--- 34edo.7right.3downright.rainbow_2-white_2-gray.ltn
--- Two adjacent white dots in one black column,
--- and two adjacent gray dots in a different one,
--- vertically offset.
--- PITFALL | TODO: Rediscover the white and gray positions.
-gray  = [1,2] -- lies
-white = [3,4] -- lies
-go 34 7   03  0  0 [ (color_white, 2, white), (color_gray, 2, gray) ]
+-- 34edo.3right.11downright.2-horiz-black.ltn
+go 34 3   11  00 00 [ (color_black, 2, [0,1] ) ]
 
-go 34 3   11  00 00 [] []
-go 34 7   03  01 00 [] [37,32,26,21,15,10]
-go 34 3   08  00 00 [] []
-go 34 4   07  00 00 [] []
-go 34 4   05  00 00 [] []
-go 34 5 (-1)  00 00 [] []
+-- 34edo.7right.3downright.2-horiz-black.ltn
+go 34 7   03  00 00 [ (color_black, 2, [0,1] ) ]
+
 go 41 6 (-1)  00 00 [] []
 go 41 6 (-1)  22 00 [] []
 go 41 7   03  00 00 [] []
