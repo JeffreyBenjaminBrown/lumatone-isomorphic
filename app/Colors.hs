@@ -96,10 +96,11 @@ color_maps = M.fromList $ [
   (31, rainbow 31  9 31), -- 9\31 = 11:9 = (3:2) ^ (1/2)
   (34, rainbow 34  5 34), -- 7\34 = (4:3) ^ (1/2) = 247c
                           -- 5\34 = (3:2) ^ (1/4) = 176c
+  (41, rainbow 41 12 41), -- 12\41 = (3:2) ^ (1/2)
   (46, rainbow 46  9 46), -- 9\27 = 8:7 = (3:2)^(1/3)
   (50, rainbow 50 16 25), -- 16\50 = 5:4
   (53, rainbow 53 31 53), -- 31\53 = 3:2
-  (58, rainbow 58 34 29),
+  (58, rainbow 58 17 58), -- 17\58 = 3:2 ^ (1/2) = 352c
 
   -- See the comment on the corresponding import statements
   -- for why the lines below differ from the lines above.
