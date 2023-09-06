@@ -2,7 +2,7 @@
 
 ## The 31-edo Bosanquet layout
 
-It's called `31edo.5right.3downleft.ltn`.
+It's called `31edo.5right.3downright.ltn`.
 It doesn't do anything the Lumatone's builtin
 31-edo Bosanquet layout doesn't do,
 but it was a useful proof of concept.
@@ -29,8 +29,8 @@ go 34 7 3 0 0
 There are two of them, which are equal except for pitch shift.
 They have these names:
 ```
-41edo.7right.3downleft.+1channels.ltn
-41edo.7right.3downleft.+9notes.ltn
+41edo.7right.3downright.+1channels.ltn
+41edo.7right.3downright.+9notes.ltn
 ```
 
 and were generated via these commands:
@@ -51,7 +51,7 @@ That's so the two layouts are in the same octave.
 The reason that's necessary is described in the main README.
 
 
-## `41edo.6right.-1downleft.ltn` is a wide, flat 41-edo layout.
+## `41edo.6right.-1downright.ltn` is a wide, flat 41-edo layout.
 
 I thought it would be cool. Maybe it is.
 I'm happy enough so far with 41-edo's Bosanquet, though,
@@ -71,7 +71,7 @@ go 41 6 (-1) 22 0
 Both are wider and flatter than Bosanquet,
 and slightly diagonal (half a button every octave).
 
-### 4\46 right x 11\46 downleft (a.k.a. 4\46 right x 7\46 down)
+### 4\46 right x 11\46 downright (a.k.a. 4\46 right x 7\46 down)
 
 This layout also comes in three versions,
 equivalent except for the amount by which they have been shifted
@@ -89,7 +89,7 @@ go 46 4 11 29 0
 
 ### 5\46 x 7\46
 
-This is more diagonal than the other one (4\46 right x 11\46 downleft),
+This is more diagonal than the other one (4\46 right x 11\46 downright),
 and taller, so I prefer the other one.
 
 ```
