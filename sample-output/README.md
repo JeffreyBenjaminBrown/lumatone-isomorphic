@@ -149,9 +149,12 @@ go 34 7   03  00 00 [ (color_black, 2, [0,1, 15,21] ) ]
 -- 41edo.6right.5downright.color-12.black-2h-2v.ltn
 go 41 6 (5)  00 00 [ (color_black, 2, [0,1, 15,21] ) ]
 
--- 41edo.7right.3downright.color-8.black-2h-2v.ltn
-go 41 7   03  00 00 [ (color_black, 2, [0,1, 15,21] ) ]
-go 41 7   03  09 01 [ (color_black, 2, [0,1, 15,21] ) ]
+-- 41edo.7right.3downright.black-2-3-36-42.ltn
+go 41 7   03  00 00 [ (color_black, 2, [2,3, 36,42] ) ]
+
+-- 41edo.7right.3downright.color-8.black-2h.ltn
+go 41 7   03  00 00 [ (color_black, 2, [2,3] ) ]
+go 41 7   03  09 01 [ (color_black, 2, [2,3] ) ]
 
 :{
 go 46 4   11  01 00 -- 46edo.4right.11downright.+1notes.2-vert-2-horiz.ltn
