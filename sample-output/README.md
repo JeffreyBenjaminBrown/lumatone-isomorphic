@@ -1,3 +1,13 @@
+# PITFALL
+
+This code is not entirely functional.
+Sometimes I have to modify `Colors.color_maps`.
+The rainbow cycle must have some length `R = k * edo`,
+where k is an integer > 1.
+Usually, k = 1. For layouts that require it not to be,
+I should add a comment to that effect.
+See, for instance, `58edo.8right.5downright` below.
+
 # What these layouts are
 
 ## The 31-edo Bosanquet layout
@@ -184,6 +194,17 @@ go 53 9   04  00 00 [] [] -- Bosanquet
 go 53 9   04  11 01 [] []
 
 :{
+-- PITFALL: Best with a rainbow cycle of length 29 = 58 / 2.
+--go 58 8   05  04 00 -- 58edo.8right.5downright.white-zigzag.+4.ltn
+go 58 8   05  00 00 -- 58edo.8right.5downright.white-zigzag.ltn
+  [ (color_white, 1, [ 17, 30 ] )     -- F, G
+  , (color_white, 1, [ 28, 39 ] )     -- vertical-ish, down from board 1 key 17 to board 2 key 50
+  , (color_white, 2, [ 25, 38, 50 ] ) -- A, B, C#
+  ]
+:}
+
+:{
+-- PITFALL: Best with a rainbow cycle of length 29 = 58 / 2.
 -- 58edo.8right.5downright.4-white-2-gray.ltn
 --go 58 8   05  04 00
 go 58 8   05  00 00

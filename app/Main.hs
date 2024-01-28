@@ -7,6 +7,7 @@ import qualified Data.Map   as M
 import           Data.Maybe as Mb
 
 import Colors
+import Colors.Simple
 import Layout
 import Lib
 import Test

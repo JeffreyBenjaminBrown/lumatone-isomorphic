@@ -50,10 +50,14 @@ test_board_key_to_edoNote = TestCase $ do
 
 test_rainbow :: Test
 test_rainbow = TestCase $ do
-  assertBool "" $ rainbow 12 7 3
+  assertBool "" $ rainbow 12 7 3 0
     == M.fromList [ (0,"ff0000")
                   , (7,"0000ff")
                   , (2,"00ff00") ]
+  assertBool "" $ rainbow 12 7 3 1
+    == M.fromList [ (1,"ff0000")
+                  , (8,"0000ff")
+                  , (3,"00ff00") ]
 
 test_rainbowColor :: Test
 test_rainbowColor = TestCase $ do

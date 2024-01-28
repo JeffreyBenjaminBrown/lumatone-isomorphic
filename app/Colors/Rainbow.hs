@@ -115,13 +115,20 @@ reps_until_entering edo trap unit =
      [ mod (i * unit) edo
      | i <- [1 ..edo] ]
 
+{-^ Easiest understood through example.
+rainbow 12 4 3 0 = Map.fromList
+                  [(0,"ff0000"),(4,"0000ff"),(8,"00ff00")]
+rainbow 12 4 3 1 = Map.fromList
+                  [(1,"ff0000"),(5,"0000ff"),(9,"00ff00")]
+-}
 rainbow :: Edo
   -> Int -- ^ The number of microtones by which to space out adjacent colors. To find a good value of this, use `units_avoiding_bad_and_finding_good`.
-  -> Int -- ^ length of the chain of units
+  -> Int -- ^ length of the chain of units.
+  -> Int -- ^ offset
   -> Map MidiNote ColorString
-rainbow edo unitInterval len =
+rainbow edo unitInterval len offset =
   M.fromList $
-  [ (unitInterval * i `mod` edo, c)
+  [ (mod (unitInterval * i + offset) edo, c)
   | i <- [0..len-1],
     let c = rainbowColor $ fromIntegral i / fromIntegral len ]
 
