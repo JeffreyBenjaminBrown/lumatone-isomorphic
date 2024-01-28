@@ -102,7 +102,7 @@ color_maps = M.fromList $ [
   (50, rainbow 50 16 25 0), -- 16\50 = 5:4
   (53, rainbow 53 31 53 0), -- 31\53 = 3:2
   --(58, rainbow 58 34 29 0), -- 17\58 = 3:2 ^ (1/2) = 352c
-  (58, rainbow 58 34 29 1), -- 17\58 = 3:2 ^ (1/2) = 352c
+  (58, rainbow 58 34 29 0), -- 17\58 = 3:2 ^ (1/2) = 352c
 
   -- See the comment on the corresponding import statements
   -- for why the lines below differ from the lines above.
