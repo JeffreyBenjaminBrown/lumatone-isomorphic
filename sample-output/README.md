@@ -195,6 +195,17 @@ go 53 9   04  11 01 [] []
 
 :{
 -- PITFALL: Best with a rainbow cycle of length 29 = 58 / 2.
+--go 58 8   05  04 00 -- 58edo.8right.5downright.triangles.+4.ltn
+  go 58 8   05  00 00 -- 58edo.8right.5downright.triangles.ltn
+  [ (color_white, 1, [ 17, 30 ] )     -- F, G
+  , (color_white, 1, [ 28, 39, 41 ] ) -- the lower left side of the triangle
+  , (color_white, 2, [ 25, 50 ] )     -- A, C#
+  ]
+:}
+
+
+:{
+-- PITFALL: Best with a rainbow cycle of length 29 = 58 / 2.
 --go 58 8   05  04 00 -- 58edo.8right.5downright.white-zigzag.+4.ltn
 go 58 8   05  00 00 -- 58edo.8right.5downright.white-zigzag.ltn
   [ (color_white, 1, [ 17, 30 ] )     -- F, G
