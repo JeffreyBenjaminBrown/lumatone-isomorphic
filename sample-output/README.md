@@ -195,6 +195,16 @@ go 53 9   04  11 01 [] []
 
 :{
 -- PITFALL: Best with a rainbow cycle of length 29 = 58 / 2.
+--go 58 8   05  04 00 -- 58edo.8right.5downright.solid-triangles.+4.ltn
+  go 58 8   05  00 00 -- 58edo.8right.5downright.solid-triangles.ltn
+  [ (color_white, 1, [ 17, 30 ] )     -- F, G
+  , (color_white, 1, [ 28, 29, 39, 40, 41, 42 ] ) -- the entire triangle except its upper-right edge
+  , (color_white, 2, [ 25, 50 ] )     -- A, C#
+  ]
+:}
+
+
+-- PITFALL: Best with a rainbow cycle of length 29 = 58 / 2.
 --go 58 8   05  04 00 -- 58edo.8right.5downright.triangles.+4.ltn
   go 58 8   05  00 00 -- 58edo.8right.5downright.triangles.ltn
   [ (color_white, 1, [ 17, 30 ] )     -- F, G
@@ -231,3 +241,9 @@ go 58 5   14  00 00 [ (color_black, 2, [7,13, 39,40] ) ]
 go 60 5   07  00 00 [] []
 go 60 7   09  00 00 [] []
 ```
+
+# A picture of the note names
+
+~/many-small/music-making/lumatone/2022-08-27-stl4uf7J.one-lumatone-octave.png
+
+Note that it LIES due to an off-by-one error.
