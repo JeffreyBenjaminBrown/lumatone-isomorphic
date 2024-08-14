@@ -170,8 +170,12 @@ go 41 7   03  00 00 [ (color_black, 2, [3,9,36,42] ) ]
 -- 43edo.7right.4downright.2-vert-2-horiz.ltn
 go 43 7   04  0  0 [ (color_black, 2, ( [5,10] ++ [19,25 ] ) ) ]
 
+-- 46edo.5right.2down.2-vert-2-horiz.ltn
+-- PITFALL: 5 right 7 downright = 5 right 2 down
+go 46 5 7 0 0 [ (color_black, 2, [5,10] ++ [28,29] ) ]
+
 -- 46edo.6right.5downright.2-vert-2-horiz.ltn
-go 46 6   05  0  0 [ (color_black, 2, [5,10] ++ [30,36] ) ]
+go 46 6 5 0 0 [ (color_black, 2, [5,10] ++ [30,36] ) ]
 
 :{
 go 46 4   11  01 00 -- 46edo.4right.11downright.+1notes.2-vert-2-horiz.ltn
@@ -179,9 +183,6 @@ go 46 4   11  01 00 -- 46edo.4right.11downright.+1notes.2-vert-2-horiz.ltn
   , (color_black, 3, [19,20]) -- a horizontal pair
   ]
 :}
-
-go 46 5   07  00 00 [] []
-go 46 5   07  13 00 [] []
 
 -- 50edo.8right.5downright.rainbow.3-white.ltn
 go 50 8   05  0  0 [ (color_white, 2, [16,27,38] ) ]
