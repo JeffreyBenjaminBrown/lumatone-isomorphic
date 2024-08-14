@@ -150,6 +150,11 @@ go 29 5   02  0  0 [ (color_black, 2, [24,29,35,40] ) ]
 -- 31edo.5right.3downright.2-vert.ltn
 go 31 5   03  0  0 [ (color_black, 2, [10,15] ) ]
 
+-- 31edo.5right.3downright.2-vert-2-horiz.ltn
+go 31 5   03  0  0 [ (color_black, 2, [10,15,36,19 ] ) ]
+  -- 36 and 19 are adjacent, if I'm right.
+  -- I'd like to write 37 rather than 19, but 37 wraps around.
+
 -- 34edo.3right.11downright.color-7.black-2-horiz-2-vert.ltn
 go 34 3   11  00 00 [ (color_black, 2, [0,1, 15,21] ) ]
 
@@ -161,6 +166,9 @@ go 41 6 (5)  00 00 [ (color_black, 2, [0,1, 15,21] ) ]
 
 -- 41edo.7right.3downright.black-3-9-36-42.ltn
 go 41 7   03  00 00 [ (color_black, 2, [3,9,36,42] ) ]
+
+-- 43edo.7right.4downright.2-vert-2-horiz.ltn
+go 43 7   04  0  0 [ (color_black, 2, [5,10,19,25 ] ) ]
 
 :{
 go 46 4   11  01 00 -- 46edo.4right.11downright.+1notes.2-vert-2-horiz.ltn
