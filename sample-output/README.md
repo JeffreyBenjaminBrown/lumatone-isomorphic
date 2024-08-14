@@ -168,7 +168,10 @@ go 41 6 (5)  00 00 [ (color_black, 2, [0,1, 15,21] ) ]
 go 41 7   03  00 00 [ (color_black, 2, [3,9,36,42] ) ]
 
 -- 43edo.7right.4downright.2-vert-2-horiz.ltn
-go 43 7   04  0  0 [ (color_black, 2, [5,10,19,25 ] ) ]
+go 43 7   04  0  0 [ (color_black, 2, ( [5,10] ++ [19,25 ] ) ) ]
+
+-- 46edo.6right.5downright.2-vert-2-horiz.ltn
+go 46 6   05  0  0 [ (color_black, 2, [5,10] ++ [30,36] ) ]
 
 :{
 go 46 4   11  01 00 -- 46edo.4right.11downright.+1notes.2-vert-2-horiz.ltn
