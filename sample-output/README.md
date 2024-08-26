@@ -99,8 +99,8 @@ go 46 4 11 29 0
 
 ### 5\46 x 7\46
 
-This is more diagonal than the other one (4\46 right x 11\46 downright),
-and taller, so I prefer the other one.
+This is more diagonal (4\46 right x 11\46 downright),
+but much less skew.
 
 ```
 go 46 5 7 0 0
@@ -161,6 +161,9 @@ go 34 3   11  00 00 [ (color_black, 2, [0,1, 15,21] ) ]
 -- 34edo.7right.3downright.color-5.black-2-horiz-2-vert.ltn
 go 34 7   03  00 00 [ (color_black, 2, [0,1, 15,21] ) ]
 
+-- 36edo.5right.3downright.black-2-horiz-2-vert.ltn
+go 36 5 3 0 0 [ (color_black, 2, [0,1, 17,23] ) ]
+
 -- 41edo.6right.5downright.color-12.black-2h-2v.ltn
 go 41 6 (5)  00 00 [ (color_black, 2, [0,1, 15,21] ) ]
 
@@ -172,9 +175,15 @@ go 43 7   04  0  0 [ (color_black, 2, ( [5,10] ++ [19,25 ] ) ) ]
 
 -- 46edo.5right.2down.2-vert-2-horiz.ltn
 -- PITFALL: 5 right 7 downright = 5 right 2 down
-go 46 5 7 0 0 [ (color_black, 2, [5,10] ++ [28,29] ) ]
+-- PITFALL: For this to be readable I need rainbow fifths,
+-- i.e. in Colors.hs there should be a passage like
+-- (46, rainbow 46 27 46 0)
+go 46 5 7 0 0 [ (color_black, 2, [3,4] ++ [22,27] ) ]
 
 -- 46edo.6right.5downright.2-vert-2-horiz.ltn
+-- PITFALL: For this to be readable I need rainbow 7:6s,
+-- i.e. in Colors.hs there should be a passage like
+-- (46, rainbow 46 9 46 0)
 go 46 6 5 0 0 [ (color_black, 2, [5,10] ++ [30,36] ) ]
 
 :{
@@ -183,6 +192,18 @@ go 46 4   11  01 00 -- 46edo.4right.11downright.+1notes.2-vert-2-horiz.ltn
   , (color_black, 3, [19,20]) -- a horizontal pair
   ]
 :}
+
+:{
+-- 48edo.5right.9downright.white-2-by-3-block.ltn
+-- TODO : try this with a rainbow spacing of 18\48 (450 cents).
+go 48 5 9 0 0 [ (color_white, 3, [
+  49,45,39, -- a vertical row
+  51,47,41
+  ] ) ]
+:}
+
+-- 50edo.6right.1down.rainbow.2-horiz-2-vert.ltn
+go 50 6 7 0 0 [ (color_white, 2, [4,5] ++ [29,30] ) ]
 
 -- 50edo.8right.5downright.rainbow.3-white.ltn
 go 50 8   05  0  0 [ (color_white, 2, [16,27,38] ) ]

@@ -115,7 +115,8 @@ reps_until_entering edo trap unit =
      [ mod (i * unit) edo
      | i <- [1 ..edo] ]
 
-{-^ Easiest understood through example.
+{-^ Easiest understood through example
+    plus reading the type signature and its comments).
 rainbow 12 4 3 0 = Map.fromList
                   [(0,"ff0000"),(4,"0000ff"),(8,"00ff00")]
 rainbow 12 4 3 1 = Map.fromList
