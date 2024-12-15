@@ -132,8 +132,10 @@ go 53 9 4 11 1
 so that it can be sensibly line-sorted in Emacs.)
 
 ```
+# 12edo.5right.6downright.5-black.ltn
+go 12 5 6 0 0 [ (color_black, 2, [5] ) ]
+
 -- go edo right_step downright_step note_shift channel_shift
-go 12 4   05  60 00 [] []
 go 24 5   04  00 00 [] []
 
 -- 27edo.4right.7downright.black-2-horiz-2-dr.ltn
