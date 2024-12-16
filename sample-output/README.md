@@ -134,6 +134,8 @@ so that it can be sensibly line-sorted in Emacs.)
 ```
 # 12edo.5right.6downright.5-black.ltn
 go 12 5 6 0 0 [ (color_black, 2, [5] ) ]
+go 12 4 5 0 0 [ (color_black, 2, [5] ) ]
+go 19 6 7 0 0 [ (color_black, 2, [4] ) ]
 
 -- go edo right_step downright_step note_shift channel_shift
 go 24 5   04  00 00 [] []
